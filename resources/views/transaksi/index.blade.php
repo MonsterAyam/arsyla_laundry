@@ -15,7 +15,7 @@
             <div class="card-body">
                 <div class="table-responsive">
                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                        <thead class="bg-gradient-primary text-light">
+                        <thead class="bg-gradient-warning text-light">
                             <tr>
                                 <th style="width: 10px;">No.</th>
                                 <th>Status</th>
