@@ -52,6 +52,7 @@ Route::get('/dashboard/laporan', function () {
         )
             ->orderBy('created_at')
             ->groupBy(DB::raw("DATE_FORMAT(created_at, '%d-%m-%Y')"))
+            ->where()
             ->get(),
         "kerugian" => JenisPengeluaran::select(
             "id",
