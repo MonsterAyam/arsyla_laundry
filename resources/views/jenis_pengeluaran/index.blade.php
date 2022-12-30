@@ -15,11 +15,13 @@
             <div class="card-body">
                 <div class="table-responsive">
                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                        <thead class="bg-gradient-danger text-light">
+                        <thead class="bg-primary text-light">
                             <tr align="center">
                                 <th style="width: 30px">No.</th>
                                 <th>Nama Jenis Pengeluaran</th>
-                                <th style="width:200px">Aksi</th>
+                                @can('admin')
+                                  <th style="width:200px">Aksi</th>
+                                @endcan
                             </tr>
                         </thead>
                         <tbody>
@@ -29,19 +31,22 @@
                             @foreach ($data as $jp)
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
-                                <td>{{ $jp->nama_jenis_pengeluaran }}</td>                              
-                                <td align="center">
+                                <td>{{ $jp->nama_jenis_pengeluaran }}</td>        
+                                @can('admin')
+                                  <td align="center" class="p-4" style="display: flex;">
                                     <a href="/dashboard/master/jenis_pengeluaran/{{ $jp->id }}/edit" class="btn btn-warning border-0 mx-2">
                                         <i class="fas fa-fw fa-edit"></i>
                                     </a>
-                                    <a href="" class="btn btn-danger border-0">
-                                      
-                                        <i class="fas fa-fw fa-trash"></i>
-
-                                    </a>
-                                </td>
+                                    <form action="/dashboard/master/jenis_pengeluaran/{{ $jp->id }}" method="POST">
+                                      @method('delete')
+                                      @csrf
+                                      <button type="submit" onclick="return confirm('Anda yakin ingin menghapus record berikut?');" class="btn btn-danger border-0 mx-2">
+                                          <i class="fas fa-fw fa-trash"></i>
+                                      </button>
+                                  </form>
+                                  </td>
+                                @endcan                      
                             </tr>
-                            
                             @endforeach
                         </tbody>
                     </table>

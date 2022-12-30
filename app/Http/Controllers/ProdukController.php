@@ -66,9 +66,11 @@ class ProdukController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Produk $produk)
     {
-        //
+        return view('produk.edit', [
+            "data" => $produk
+        ]);
     }
 
     /**
@@ -78,9 +80,18 @@ class ProdukController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Produk $produk, Request $request)
     {
-        //
+        $validateData = $request->validate([
+            "jenis_produk" => "required",
+            "kode" => "required",
+            "nama" => "required",
+            "harga_jual" => "required|numeric"
+        ]);
+
+        Produk::where('id', $produk->id)
+            ->update($validateData);
+        return redirect('/dashboard/master/produk')->with('success', 'Data Produk Berhasil Diubah!');
     }
 
     /**

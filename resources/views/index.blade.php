@@ -18,7 +18,7 @@
                                     <div class="col mr-2">
                                         <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $baru }}</div>
                                         <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                            BARU</div>
+                                            BELUM DIBAYAR</div>
                                     </div>
                                     <div class="col-auto">
                                         <i class="fas fa-file fa-2x text-gray-300"></i>
@@ -54,7 +54,7 @@
                                     <div class="col mr-2">
                                         <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $selesai }}</div>
                                         <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
-                                            Selesai</div>
+                                            SUDAH DIBAYAR</div>
                                     </div>
                                     <div class="col-auto">
                                         <i class="fas fa-check-square fa-2x text-gray-300"></i>

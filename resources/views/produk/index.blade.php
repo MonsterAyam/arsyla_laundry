@@ -15,14 +15,16 @@
             <div class="card-body">
                 <div class="table-responsive">
                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                        <thead class="bg-gradient-secondary text-light">
+                        <thead class="bg-primary text-light">
                             <tr align="center">
                                 <th style="width: 80px">No.</th>
                                 <th>Jenis Produk</th>
                                 <th>Code</th>
                                 <th>Nama</th>
                                 <th>Harga Jual</th>
-                                <th style="width:150px">Aksi</th>
+                                @can('admin')
+                                    <th style="width:150px">Aksi</th>
+                                @endcan
                             </tr>
                         </thead>
                         <tbody>
@@ -39,19 +41,20 @@
                                 <td>{{ $pr->kode }}</td>
                                 <td>{{ $pr->nama }}</td>
                                 <td>{{ $pr->harga_jual }}</td>
-                                <td class="d-flex">
-                                    <a href="" class="btn btn-warning border-0 mx-2">
-                                        <i class="fas fa-fw fa-edit"></i>
-                                    </a>
-
-                                    <form action="/dashboard/master/produk/{{ $pr->id }}" method="POST">
-                                        @method('delete')
-                                        @csrf
-                                        <button type="submit" onclick="return confirm('Anda yakin ingin menghapus data berikut?');" class="btn btn-danger border-0">
-                                            <i class="fas fa-fw fa-trash"></i>
-                                        </button>
-                                    </form>
-                                </td>
+                                @can('admin')
+                                    <td class="d-flex">
+                                        <a href="/dashboard/master/produk/{{ $pr->id }}/edit" class="btn btn-warning border-0 mx-2">
+                                            <i class="fas fa-fw fa-edit"></i>
+                                        </a>
+                                        <form action="/dashboard/master/produk/{{ $pr->id }}" method="POST">
+                                            @method('delete')
+                                            @csrf
+                                            <button type="submit" onclick="return confirm('Anda yakin ingin menghapus data berikut?');" class="btn btn-danger border-0">
+                                                <i class="fas fa-fw fa-trash"></i>
+                                            </button>
+                                        </form>
+                                    </td>
+                                @endcan
                             </tr>
                             
                             @endforeach

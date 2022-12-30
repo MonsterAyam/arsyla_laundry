@@ -34,9 +34,9 @@ Route::post('/logout', [LoginController::class, 'destroy'])->middleware('auth');
 
 Route::get('/dashboard', function () {
     return view('index', [
-        "baru" => Invoice::where('status', 'menunggu')->count(),
+        "baru" => Invoice::where('status', 'belum dibayar')->count(),
         "salah" => Invoice::where('status', 'salah input')->count(),
-        "selesai" => Invoice::where('status', 'selesai')->count(),
+        "selesai" => Invoice::where('status', 'sudah dibayar')->count(),
         "diambil" => Invoice::where('status', 'diambil')->count()
     ]);
 })->middleware('auth');
@@ -84,6 +84,6 @@ Route::get('/dashboard/invoice/print/{id}', [InvoiceController::class, 'print'])
 
 Route::resource('/dashboard/user', UserController::class)->middleware('admin');
 Route::resource('/dashboard/master/pelanggan', PelangganController::class)->middleware('auth');
-Route::resource('/dashboard/master/jenis_pengeluaran', JenisPengeluaranController::class)->middleware('admin');
-Route::resource('/dashboard/master/produk', ProdukController::class)->middleware('admin');
+Route::resource('/dashboard/master/jenis_pengeluaran', JenisPengeluaranController::class);
+Route::resource('/dashboard/master/produk', ProdukController::class);
 Route::resource('/dashboard/invoice', InvoiceController::class)->middleware('auth');

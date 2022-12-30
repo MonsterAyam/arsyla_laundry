@@ -14,7 +14,7 @@ class PelangganController extends Controller
      */
     public function index()
     {
-        return view('pelanggan.index',[
+        return view('pelanggan.index', [
             "data" => Pelanggan::all()
         ]);
     }
@@ -89,8 +89,7 @@ class PelangganController extends Controller
 
         Pelanggan::where('id', $pelanggan->id)
             ->update($validateData);
-
-            return redirect('/dashboard/master/pelanggan')->with('success', 'Data Pelanggan Berhasil Diubah!');
+        return redirect('/dashboard/master/pelanggan')->with('success', 'Data Pelanggan Berhasil Diubah!');
     }
 
     /**

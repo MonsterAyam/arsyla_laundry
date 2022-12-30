@@ -15,7 +15,7 @@
             <div class="card-body">
                 <div class="table-responsive">
                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                        <thead class="bg-gradient-warning text-light">
+                        <thead class="bg-primary text-light">
                             <tr align="center">
                                 <th>No.</th>
                                 <th>Role Name</th>
@@ -67,7 +67,7 @@
 
     <!-- Modal -->
 <div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-scrollable modal-xl">
+    <div class="modal-dialog modal-dialog-scrollable modal-md">
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title" id="staticBackdropLabel">Tambah Pengguna Baru</h5>
@@ -78,7 +78,7 @@
         <div class="modal-body">
           <form action="/dashboard/user" method="POST" enctype="multipart/form-data" class="form d-flex flex-wrap justify-content-between">
             @csrf
-              <div class="col-lg-5">
+              <div class="w-100 p-3">
                   <div class="form-group">
                       <input type="text" name="username" placeholder="Username" id="username" class="form-control">
                   </div>
@@ -90,9 +90,6 @@
                   </div>
                   <div class="form-group">
                       <textarea name="address" id="" placeholder="Alamat" cols="1" class="form-control" rows="3"></textarea>
-                  </div>
-                  <div class="form-group">
-                      <input type="file" name="image" id="image" onchange="previewImage() class="form-control">
                   </div>
                   <div class="form-group">
                       <input type="password" name="password" placeholder="Password" id="" class="form-control">

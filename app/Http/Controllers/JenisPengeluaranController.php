@@ -79,9 +79,18 @@ class JenisPengeluaranController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, JenisPengeluaran $jenisPengeluaran)
     {
-        //
+        $validateData = $request->validate([
+            "nama_jenis_pengeluaran" => "required|min:3|max:50",
+            "total_harga" => "required",
+            "keterangan"  => "required|max:50",
+        ]);
+
+        JenisPengeluaran::where('id', $jenisPengeluaran->id)
+            ->update($validateData);
+
+        return redirect('/dashboard/master/jenis_pengeluaran')->with('success', 'Data Pengeluaran Berhasil Diubah!');
     }
 
     /**
@@ -90,8 +99,10 @@ class JenisPengeluaranController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(JenisPengeluaran $jenisPengeluaran)
     {
-        //
+        JenisPengeluaran::destroy($jenisPengeluaran->id);
+
+        return back()->with('success', 'Data Pengeluaran Berhasil Dihapus!');
     }
 }

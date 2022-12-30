@@ -48,8 +48,7 @@ class UserController extends Controller
             "password" => "required|min:5"
         ]);
 
-        if($request->file('image'))
-        {
+        if ($request->file('image')) {
             $validateData['image'] = $request->file('image')->store('profil-pengguna');
         }
 
@@ -98,11 +97,13 @@ class UserController extends Controller
             "name" => "required|max:30",
             "email" => "required|email",
             "address" => "required",
-            "password" => "required",
             "role_id" => "required"
         ]);
-
-        $validateData['password'] = Hash::make($validateData['password']);
+        if ($request['password']) {
+            $validateData['password'] = Hash::make($validateData['password']);
+        } else {
+            $validateData['password'] = $user->password;
+        }
 
         User::where('id', $user->id)
             ->update($validateData);
@@ -118,8 +119,7 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
-        if($user->image)
-        {
+        if ($user->image) {
             Storage::delete($user->image);
         }
         User::destroy($user->id);

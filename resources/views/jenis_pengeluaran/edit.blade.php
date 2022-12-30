@@ -15,38 +15,47 @@
                 <form action="/dashboard/master/jenis_pengeluaran/{{ $data->id }}" method="POST" class="form d-flex flex-wrap justify-content-center">
                     @method('put')
                     @csrf
-                    <div class="col-lg-5">
-                      <div class="form-group">
-                          <label for="kodeinvoice">No</label>
-                          <input type="text" min="0" disabled value="{{ old('id', $data->id) }}" name="id" id="kodeinvoice" class="form-control">
-                      </div>
-                    </div>
-                    <div class="col-lg-5">
-                      <div class="form-group">
-                          <label for="nama">Nama Jenis Pengeluaran</label>
-                          <input type="text" value="{{ old('pelanggan', $data->nama_pelanggan) }}" name="nama_pelanggan" id="nama" class="form-control">
-                      </div>
-                    </div>
-                    <div class="col-lg-5">
-                        <div class="form-group">
-                            <label for="status">Nomor Telepon</label>
-                            <input type="number" name="no_telp" value="{{ $data->no_telp }}" id="" class="form-control">
+                    <div class="row w-100 d-flex justify-content-around">
+                        <div class="col-lg-5">
+                            <div class="form-group">
+                                <label for="kodeinvoice">Id</label>
+                                <input type="text" min="0" disabled value="{{ old('id', $data->id) }}" name="id" id="kodeinvoice" class="form-control">
+                            </div>
+                        </div>
+                        <div class="col-lg-5">
+                            <div class="form-group">
+                                <label for="nama">Nama Jenis Pengeluaran</label>
+                                <input type="text" value="{{ old('nama_jenis_pengeluaran', $data->nama_jenis_pengeluaran) }}" name="nama_jenis_pengeluaran" id="nama" class="form-control">
+                            </div>
                         </div>
                     </div>
-                      <div class="col-lg-5 mt-3 mx-auto">
+                    <div class="row w-100 d-flex justify-content-around">
+                        <div class="col-lg-5">
+                            <div class="form-group">
+                                <label for="status">Total Harga</label>
+                                <input type="number" name="total_harga" value="{{ $data->total_harga }}" id="" class="form-control">
+                            </div>
+                        </div>
+                        <div class="col-lg-5">
+                            <div class="form-group">
+                                <label for="status">keterangan</label>
+                                <input type="text" name="keterangan" value="{{ $data->keterangan }}" id="" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                        <div class="col-lg-10 mt-3 mx-auto">
                         <div class="form-group">
                             <button type="submit" class="btn btn-primary w-100 mb-3">Ubah Data</button>
-                            <a href="/dashboard/master/pelanggan" class="btn btn-secondary w-100">Kembali</a>
+                            <a href="/dashboard/master/jenis_pengeluaran" class="btn btn-secondary w-100">Kembali</a>
                         </div>
                     </div>               
-                  </div>
+                </div>
             </div>
         </div>
 
- 
     <!-- /.container-fluid -->
 
-  
+
 
 
 
