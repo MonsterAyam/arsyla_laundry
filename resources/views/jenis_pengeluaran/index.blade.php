@@ -6,7 +6,12 @@
  <div class="d-sm-flex align-items-center justify-content-between mb-4">
     <h1 class="h3 mb-0 text-gray-800">Jenis Pengeluaran</h1>
 </div>
-
+<form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
+  <div class="input-group">
+      <input type="search" name="search" class="form-control" id="inlineFormInputGroupUsername">
+      <button type="submit" class="btn btn-primary rounded-0">Search</button>
+  </div>
+</form>
         <!-- DataTales Example -->
         <div class="card shadow mb-4">
             <div class="card-header py-3">
