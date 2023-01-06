@@ -12,11 +12,17 @@ class PelangganController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        return view('pelanggan.index', [
-            "data" => Pelanggan::all()
-        ]);
+        if ($request->get('search')) {
+            return view('pelanggan.index', [
+                "data" => Pelanggan::where('nama_pelanggan', 'like', '%' . $request->get('search') . '%')->orWhere('address', 'like', '%' . $request->get('search') . '%')->orWhere('no_telp', 'like', '%' . $request->get('search') . '%')->get()
+            ]);
+        } else {
+            return view('pelanggan.index', [
+                "data" => Pelanggan::all()
+            ]);
+        }
     }
 
     /**

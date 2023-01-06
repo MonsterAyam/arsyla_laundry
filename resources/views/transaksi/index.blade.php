@@ -6,16 +6,28 @@
  <div class="d-sm-flex align-items-center justify-content-between mb-4">
     <h1 class="h3 mb-0 text-gray-800">Transaksi Penjualan</h1>
 </div>
-<form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
-    <div class="input-group">
-        <input type="search" name="search" class="form-control" id="inlineFormInputGroupUsername">
-        <button type="submit" class="btn btn-primary rounded-0">Search</button>
-    </div>
-</form>
         <!-- DataTales Example -->
         <div class="card shadow mb-4">
             <div class="card-header py-3">
-                <a href="/dashboard/invoice/create" class="btn btn-primary">+ Tambah Data</a>
+                <div class="row d-flex justify-content-between">
+                    <div class="col-3">
+                        <a href="/dashboard/invoice/create" class="btn btn-primary">+ Tambah Data</a>
+                    </div>
+                    <div class="col-3 d-flex">
+                            {{-- <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0 mx-3">
+                                <div class="input-group">
+                                    <input type="search" name="nameSearch" class="form-control" id="inlineFormInputGroupUsername">
+                                    <button type="submit" class="btn btn-primary rounded-0">Search</button>
+                                </div>
+                            </form> --}}
+                            <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
+                                <div class="input-group">
+                                    <input type="date" name="search" class="form-control" id="inlineFormInputGroupUsername">
+                                    <button type="submit" class="btn btn-primary rounded-0">Search</button>
+                                </div>
+                            </form>
+                    </div>
+                </div>
             </div>
             <div class="card-body">
                 <div class="table-responsive">

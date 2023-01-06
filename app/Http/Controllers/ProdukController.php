@@ -12,11 +12,17 @@ class ProdukController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        return view('produk.index', [
-            "data" => Produk::all()
-        ]);
+        if ($request->get('search')) {
+            return view('produk.index', [
+                "data" => Produk::where('jenis_produk', 'like', '%' . $request->get('search') . '%')->orWhere('kode', 'like', '%' . $request->get('search') . '%')->orWhere('nama', 'like', '%' . $request->get('search') . '%')->orWhere('harga_jual', 'like', '%' . $request->get('search') . '%')->get()
+            ]);
+        } else {
+            return view('produk.index', [
+                "data" => Produk::all()
+            ]);
+        }
     }
 
     /**

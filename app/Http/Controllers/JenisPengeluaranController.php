@@ -12,11 +12,17 @@ class JenisPengeluaranController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        return view('jenis_pengeluaran.index', [
-            "data" => JenisPengeluaran::all()
-        ]);
+        if ($request->get('search')) {
+            return view('jenis_pengeluaran.index', [
+                "data" => JenisPengeluaran::where('nama_jenis_pengeluaran', 'like', '%' . $request->get('search') . '%')->orWhere('total_harga', 'like', '%' . $request->get('search') . '%')->orWhere('keterangan', 'like', '%' . $request->get('search') . '%')->get()
+            ]);
+        } else {
+            return view('jenis_pengeluaran.index', [
+                "data" => JenisPengeluaran::all()
+            ]);
+        }
     }
 
     /**

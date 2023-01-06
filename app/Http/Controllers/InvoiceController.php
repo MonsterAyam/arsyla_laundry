@@ -17,11 +17,23 @@ class InvoiceController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        return view('transaksi.index', [
-            "data" => Invoice::get()->reverse()
-        ]);
+        if ($request->get('search')) {
+            return view('transaksi.index', [
+                "title" => "data pelanggan",
+                "data" => Invoice::where('tanggal_dibayar', 'like', '%' . $request->get('search') . '%')->orWhere('grand_total', 'like', '%' . $request->get('search') . '%')->get()->reverse()
+            ]);
+            // } else if ($request->get('nameSearch')) {
+            //     return view('transaksi.index', [
+            //         "title" => "data pelanggan",
+            //         "data" => Pelanggan::where('nama_pelanggan', 'like', '%' . $request->get('search') . '%')->get()->reverse()
+            //     ]);
+            // } else {
+            return view('transaksi.index', [
+                "data" => Invoice::get()->reverse()
+            ]);
+        }
     }
 
     /**
