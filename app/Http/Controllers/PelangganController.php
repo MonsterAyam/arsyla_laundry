@@ -15,12 +15,22 @@ class PelangganController extends Controller
     public function index(Request $request)
     {
         if ($request->get('search')) {
+            $searchTerm = $request->get('search');
+            $data = Pelanggan::query()
+                ->where(function ($query) use ($searchTerm) {
+                    if ($searchTerm) {
+                        $query->where('nama_pelanggan', 'like', '%' . $searchTerm . '%')
+                            ->orWhere('address', 'like', '%' . $searchTerm . '%')
+                            ->orWhere('no_telp', 'like', '%' . $searchTerm . '%');
+                    }
+                })
+                ->paginate(10);
             return view('pelanggan.index', [
-                "data" => Pelanggan::where('nama_pelanggan', 'like', '%' . $request->get('search') . '%')->orWhere('address', 'like', '%' . $request->get('search') . '%')->orWhere('no_telp', 'like', '%' . $request->get('search') . '%')->get()
+                "data" => $data
             ]);
         } else {
             return view('pelanggan.index', [
-                "data" => Pelanggan::all()
+                "data" => Pelanggan::query()->orderBy('nama_pelanggan', 'asc')->paginate(10)
             ]);
         }
     }

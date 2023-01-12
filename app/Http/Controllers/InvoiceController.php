@@ -20,18 +20,22 @@ class InvoiceController extends Controller
     public function index(Request $request)
     {
         if ($request->get('search')) {
+            $searchTerm = $request->get('search');
+            $data = Invoice::query()->latest()
+                ->where(function ($query) use ($searchTerm) {
+                    if ($searchTerm) {
+                        $query->where('tanggal_dibayar', 'like', '%' . $searchTerm . '%')
+                            ->orWhere('grand_total', 'like', '%' . $searchTerm . '%');
+                    }
+                })
+                ->paginate(10);
             return view('transaksi.index', [
                 "title" => "data pelanggan",
-                "data" => Invoice::where('tanggal_dibayar', 'like', '%' . $request->get('search') . '%')->orWhere('grand_total', 'like', '%' . $request->get('search') . '%')->get()->reverse()
+                "data" => $data
             ]);
-            // } else if ($request->get('nameSearch')) {
-            //     return view('transaksi.index', [
-            //         "title" => "data pelanggan",
-            //         "data" => Pelanggan::where('nama_pelanggan', 'like', '%' . $request->get('search') . '%')->get()->reverse()
-            //     ]);
-            // } else {
+        } else {
             return view('transaksi.index', [
-                "data" => Invoice::get()->reverse()
+                "data" => Invoice::query()->latest()->paginate(10)
             ]);
         }
     }

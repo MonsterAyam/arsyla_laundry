@@ -60,7 +60,7 @@
                                        <p class="badge badge-success font-weight-bold p-2">{{ $i->status }}</p>
                                     @endif
                                 </td>
-                                <td>{{ $i->id }}</td>
+                                <td>{{ $data->firstItem()+$loop->index }}</td>
                                 <td>{{ $i->pelanggan->nama_pelanggan }}</td>
                                 <td>{{ $i->created_at }}</td>
                                 <td>{{ $i->batas_waktu }}</td>
@@ -77,13 +77,15 @@
                                     <a href="/dashboard/invoice/{{ $i->id }}/edit" class="btn btn-sm btn-warning border-0 mx-1">
                                         <i class="fas fa-fw fa-edit"></i>
                                     </a>
-                                    <form action="/dashboard/invoice/{{ $i->id }}" method="POST">
-                                        @method('delete')
-                                        @csrf
-                                        <button type="submit" onclick="return confirm('Anda yakin ingin menghapus record berikut?');" class="btn btn-sm btn-danger mx-1">
-                                            <i class="fas fa-fw fa-trash"></i>
-                                        </button>
-                                    </form>
+                                    @can('admin')
+                                        <form action="/dashboard/invoice/{{ $i->id }}" method="POST">
+                                            @method('delete')
+                                            @csrf
+                                            <button type="submit" onclick="return confirm('Anda yakin ingin menghapus record berikut?');" class="btn btn-sm btn-danger mx-1">
+                                                <i class="fas fa-fw fa-trash"></i>
+                                            </button>
+                                        </form>
+                                    @endcan
                                 </td>
                             </tr>
                             
@@ -97,6 +99,7 @@
                           
                         </tbody>
                     </table>
+                    {{ $data->links() }}
                 </div>
             </div>
         </div>

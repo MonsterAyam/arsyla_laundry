@@ -41,7 +41,7 @@
                           @endif
                             @foreach ($data as $jp)
                             <tr>
-                                <td>{{ $loop->iteration }}</td>
+                                <td>{{ $data->firstItem()+$loop->index }}</td>
                                 <td>{{ $jp->nama_jenis_pengeluaran }}</td>        
                                 @can('admin')
                                   <td align="center" class="p-4" style="display: flex;">
@@ -61,6 +61,7 @@
                             @endforeach
                         </tbody>
                     </table>
+                    {{ $data->links() }}
                 </div>
             </div>
         </div>

@@ -41,7 +41,7 @@
                             @endif
                             @foreach ($data as $p)
                             <tr>
-                                <td>{{ $loop->iteration }}</td>
+                                <td>{{ $data->firstItem()+$loop->index }}</td>
                                 <td>{{ $p->nama_pelanggan }}</td>
                                 <td>{{ $p->address }}</td>
                                 <td>{{ $p->no_telp }}</td>
@@ -62,6 +62,7 @@
                             @endforeach
                         </tbody>
                     </table>
+                    {{ $data->links() }}
                 </div>
             </div>
         </div>

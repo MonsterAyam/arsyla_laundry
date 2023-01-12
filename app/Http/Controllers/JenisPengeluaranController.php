@@ -15,12 +15,23 @@ class JenisPengeluaranController extends Controller
     public function index(Request $request)
     {
         if ($request->get('search')) {
+            $searchTerm = $request->get('search');
+            $data = JenisPengeluaran::query()
+                ->where(function ($query) use ($searchTerm) {
+                    if ($searchTerm) {
+                        $query->where('nama_jenis_pengeluaran', 'like', '%' . $searchTerm . '%')
+                            ->orWhere('total_harga', 'like', '%' . $searchTerm . '%')
+                            ->orWhere('keterangan', 'like', '%' . $searchTerm . '%')->get();
+                    }
+                })
+                ->paginate(10);
             return view('jenis_pengeluaran.index', [
-                "data" => JenisPengeluaran::where('nama_jenis_pengeluaran', 'like', '%' . $request->get('search') . '%')->orWhere('total_harga', 'like', '%' . $request->get('search') . '%')->orWhere('keterangan', 'like', '%' . $request->get('search') . '%')->get()
+                "data" => $data
             ]);
         } else {
             return view('jenis_pengeluaran.index', [
-                "data" => JenisPengeluaran::all()
+                "data" => JenisPengeluaran::query()->orderBy('nama_jenis_pengeluaran', 'asc')
+                    ->paginate(10)
             ]);
         }
     }

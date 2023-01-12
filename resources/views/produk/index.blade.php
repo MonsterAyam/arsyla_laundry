@@ -11,7 +11,9 @@
             <div class="card-header py-3">
                 <div class="row d-flex justify-content-between">
                     <div class="col-3">
-                        <button class="btn btn-primary" data-toggle="modal" data-target="#staticBackdrop">+ Tambah Data</button>
+                        @can('admin')
+                            <button class="btn btn-primary" data-toggle="modal" data-target="#staticBackdrop">+ Tambah Data</button>  
+                        @endcan
                     </div>
                     <div class="col-3">
                         <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
@@ -47,7 +49,7 @@
 
                             </tr>
                             <tr>
-                                <td>{{ $loop->iteration }}</td>
+                                <td>{{ $data->firstItem()+$loop->index }}</td>
                                 <td>{{ $pr->jenis_produk }}</td>
                                 <td>{{ $pr->kode }}</td>
                                 <td>{{ $pr->nama }}</td>
@@ -71,6 +73,7 @@
                             @endforeach
                         </tbody>
                     </table>
+                    {{ $data->links() }}
                 </div>
             </div>
         </div>

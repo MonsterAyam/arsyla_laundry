@@ -15,12 +15,23 @@ class ProdukController extends Controller
     public function index(Request $request)
     {
         if ($request->get('search')) {
+            $searchTerm = $request->get('search');
+            $data = Produk::query()
+                ->where(function ($query) use ($searchTerm) {
+                    if ($searchTerm) {
+                        $query->where('jenis_produk', 'like', '%' . $searchTerm . '%')
+                            ->orWhere('kode', 'like', '%' . $searchTerm . '%')
+                            ->orWhere('nama', 'like', '%' . $searchTerm . '%')
+                            ->orWhere('harga_jual', 'like', '%' . $searchTerm . '%')->get();
+                    }
+                })
+                ->paginate(10);
             return view('produk.index', [
-                "data" => Produk::where('jenis_produk', 'like', '%' . $request->get('search') . '%')->orWhere('kode', 'like', '%' . $request->get('search') . '%')->orWhere('nama', 'like', '%' . $request->get('search') . '%')->orWhere('harga_jual', 'like', '%' . $request->get('search') . '%')->get()
+                "data" => $data
             ]);
         } else {
             return view('produk.index', [
-                "data" => Produk::all()
+                "data" => Produk::paginate(10)
             ]);
         }
     }

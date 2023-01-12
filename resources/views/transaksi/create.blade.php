@@ -27,7 +27,7 @@
                                             {{ $message }}
                                         </div>
                                     @enderror
-                                    <input type="number" placeholder="Qty" min="0" name="qty_produk" id="" class="form-control rounded-0 border-dark mt-3" style="width: 39%">
+                                    <input type="number" placeholder="Qty" step="0.1" min="0" name="qty_produk" id="" class="form-control rounded-0 border-dark mt-3" style="width: 39%">
                                     @error('qty_produk')
                                     <div class="invalid-feedback">
                                         {{ $message }}
