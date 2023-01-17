@@ -25,7 +25,7 @@
                         <div class="col-lg-5">
                             <div class="form-group">
                                 <label for="nama">Nama Jenis Pengeluaran</label>
-                                <input type="text" value="{{ old('nama_jenis_pengeluaran', $data->nama_jenis_pengeluaran) }}" name="nama_jenis_pengeluaran" id="nama" class="form-control">
+                                <input type="text" required value="{{ old('nama_jenis_pengeluaran', $data->nama_jenis_pengeluaran) }}" name="nama_jenis_pengeluaran" id="nama" class="form-control">
                             </div>
                         </div>
                     </div>
@@ -33,13 +33,13 @@
                         <div class="col-lg-5">
                             <div class="form-group">
                                 <label for="status">Total Harga</label>
-                                <input type="number" name="total_harga" value="{{ $data->total_harga }}" id="" class="form-control">
+                                <input type="number" required name="total_harga" value="{{ $data->total_harga }}" id="" class="form-control">
                             </div>
                         </div>
                         <div class="col-lg-5">
                             <div class="form-group">
                                 <label for="status">keterangan</label>
-                                <input type="text" name="keterangan" value="{{ $data->keterangan }}" id="" class="form-control">
+                                <input type="text" required name="keterangan" value="{{ $data->keterangan }}" id="" class="form-control">
                             </div>
                         </div>
                     </div>

@@ -7,7 +7,7 @@
     <h1 class="h3 mb-0 text-gray-800">Transaksi Penjualan</h1>
 
     <a href="/dashboard/invoice/print/{{ $data_pg->id }}" class="d-none d-sm-inline-block btn btn-sm btn-danger shadow-sm"><i
-        class="fas fa-download fa-sm text-white-50"></i> Cetak Laporan</a>
+        class="fas fa-download fa-sm text-white-50"></i> Cetak Nota</a>
 </div>
 
 

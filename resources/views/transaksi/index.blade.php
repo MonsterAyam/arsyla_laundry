@@ -50,7 +50,7 @@
                             <tr>
                                 @foreach ($data as $i)
 
-                                <td style="width: 10px;">{{ $loop->iteration }}</td>
+                                <td style="width: 10px;">{{ $data->firstItem()+$loop->index }}</td>
                                 <td>
                                     @if ($i->status === 'belum dibayar')
                                        <p class="badge badge-primary font-weight-bold p-2">{{ $i->status }}</p>
@@ -60,7 +60,7 @@
                                        <p class="badge badge-success font-weight-bold p-2">{{ $i->status }}</p>
                                     @endif
                                 </td>
-                                <td>{{ $data->firstItem()+$loop->index }}</td>
+                                <td>INV00{{ $i->id }}</td>
                                 <td>{{ $i->pelanggan->nama_pelanggan }}</td>
                                 <td>{{ $i->created_at }}</td>
                                 <td>{{ $i->batas_waktu }}</td>

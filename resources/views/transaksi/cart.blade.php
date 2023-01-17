@@ -45,7 +45,7 @@
                     <div class="col-lg-8">
                         <div class="form-group d-flex" >
                             <label for="" class="font-weight-bold h6 text-dark mt-2 mr-3">Batas waktu</label>
-                            <input type="datetime-local" name="batas_waktu" class="form-control" id="">
+                            <input type="datetime-local" required name="batas_waktu" class="form-control" id="">
                         </div>
                     </div>
                 </div>
@@ -115,6 +115,7 @@
                                 <option value="{{ $pg->id }}">{{ $pg->nama_pelanggan }}({{ $pg->no_telp }})</option>
                                 @endforeach
                             </select>
+                           {{ $val['harga_produk']}}
                               <button class="btn btn-info font-weight-bold rounded-0">Tambah</button>
                         </div>
                         <div class="form-group d-flex">

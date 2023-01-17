@@ -24,19 +24,19 @@
                     <div class="col-lg-5">
                       <div class="form-group">
                           <label for="nama">Nama Pelanggan</label>
-                          <input type="text" value="{{ old('pelanggan', $data->nama_pelanggan) }}" name="nama_pelanggan" id="nama" class="form-control">
+                          <input type="text" required value="{{ old('pelanggan', $data->nama_pelanggan) }}" name="nama_pelanggan" id="nama" class="form-control">
                       </div>
                     </div>
                     <div class="col-lg-5">
                         <div class="form-group">
                             <label for="status">Nomor Telepon</label>
-                            <input type="number" name="no_telp" value="{{ $data->no_telp }}" id="" class="form-control">
+                            <input type="number" required name="no_telp" value="{{ $data->no_telp }}" id="" class="form-control">
                         </div>
                     </div>
                     <div class="col-lg-5">
                         <div class="form-group">
                             <label for="total">Alamat</label>
-                            <textarea name="address" id="" style="resize: none" cols="3" rows="3" class="form-control">{{ $data->address }}</textarea>
+                            <textarea name="address" required id="" style="resize: none" cols="3" rows="3" class="form-control">{{ $data->address }}</textarea>
                         </div>
                       </div>
                       <div class="col-lg-5 mt-3 mx-auto">

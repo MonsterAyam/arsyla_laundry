@@ -22,13 +22,13 @@
                     <div class="col-lg-10">
                       <div class="form-group">
                           <label for="nama">Username</label>
-                          <input type="text" value="{{ old('username', $data->username) }}" name="username" id="nama" class="form-control">
+                          <input type="text" required value="{{ old('username', $data->username) }}" name="username" id="nama" class="form-control">
                       </div>
                     </div>
                     <div class="col-lg-10">
                       <div class="form-group">
                           <label for="nama">Nama Pengguna</label>
-                          <input type="text" value="{{ old('name', $data->name) }}" name="name" id="nama" class="form-control">
+                          <input type="text" required value="{{ old('name', $data->name) }}" name="name" id="nama" class="form-control">
                       </div>
                     </div>
                     <div class="col-lg-10">

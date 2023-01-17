@@ -98,10 +98,10 @@
             @csrf
               <div class="col-lg-12">
                   <div class="form-group">
-                      <input type="text" name="kode" placeholder="Kode Produk" id="kodeProduk" class="form-control">
+                      <input type="text" name="kode" required placeholder="Kode Produk" id="kodeProduk" class="form-control">
                   </div>
                   <div class="form-group">
-                      <input type="text" name="nama" placeholder="Nama Produk" id="namaProduk" class="form-control">
+                      <input type="text" name="nama" required placeholder="Nama Produk" id="namaProduk" class="form-control">
                 </div>
                   <div class="form-group">
                       <select name="jenis_produk" class="form-control" id="jenisProduk">
@@ -110,7 +110,7 @@
                       </select>
                   </div>
                   <div class="form-group">
-                      <input type="number" min="0" placeholder="Harga Produk" name="harga_jual" id="hargaProduk" class="form-control">
+                      <input type="number" min="0" required placeholder="Harga Produk" name="harga_jual" id="hargaProduk" class="form-control">
                   </div>
                   <div class="form-group">
                       <button type="submit" class="btn btn-primary w-100 my-3">Simpan</button>                  
