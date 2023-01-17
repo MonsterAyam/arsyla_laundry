@@ -23,7 +23,7 @@
                         <thead class="bg-gradient-success text-light">
                             <tr align="center">
                                 <th>No.</th>
-                                <th>Per-Hari</th>
+                                <th>Per-Bulan</th>
                                 <th>Pendapatan</th>
                             </tr>
                         </thead>
@@ -38,12 +38,11 @@
                                <td>{{ $p->total_pendapatan }}</td>
                            </tr>
                         @endforeach
-                        
                         </tbody>
                         <thead class="bg-gradient-danger text-light">
                             <tr align="center">
                                 <th>No.</th>
-                                <th>Per-Hari</th>
+                                <th>Per-Bulam</th>
                                 <th>Kerugian</th>
                             </tr>
                         </thead>
