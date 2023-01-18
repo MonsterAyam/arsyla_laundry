@@ -17,7 +17,7 @@
                                 @csrf
                                 <div class="form-group">
                                     <select name="lang" class="js-searchBox" style="display: none;">
-                                        <option value="">--Pilih Produk--</option>
+                                        <option value="--Pilih Produk--" disabled selected>--Pilih Produk--</option>
                                         @foreach ( $produk as $pk )
                                         <option value="{{ $pk->id }}">{{ $pk->kode }}({{ $pk->harga_jual }}) </option>
                                         @endforeach
@@ -27,12 +27,12 @@
                                             {{ $message }}
                                         </div>
                                     @enderror
-                                    <input type="number" placeholder="Qty" step="0.1" min="0" name="qty_produk" id="" class="form-control rounded-0 border-dark mt-3" style="width: 39%">
+                                    <input type="number" required placeholder="Qty" step="0.1" min="0" name="qty_produk" id="" class="form-control rounded-0 border-dark mt-3" style="width: 39%">
                                     @error('qty_produk')
                                     <div class="invalid-feedback">
                                         {{ $message }}
                                     </div>
-                                     @enderror
+                                    @enderror
                                 </div>
                                 <div class="form-group">
                                     <button type="submit" class="btn btn-info font-weight-bold">Proses</button>
@@ -70,27 +70,6 @@
                       </table>
                 </div>
 
-                <div class="row d-flex justify-content-start">
-                    <div class="col-lg-5">
-                        <div class="form-group my-3"  style="display:flex; align-content: center">
-                            <select name="lang" class="js-searchBox" style="display: none;">
-                                <option>Pelanggan</option>
-                                @foreach ( $pelanggan as $pg )
-                                <option value="{{ $pg->id }}">{{ $pg->nama_pelanggan }}({{ $pg->no_telp }})</option>
-                                @endforeach
-                            </select>
-                              <button class="btn btn-info font-weight-bold rounded-0">Tambah</button>
-                        </div>
-                        <div class="form-group d-flex">
-                            <label for="" class="font-weight-bold h6 text-dark mt-2 mr-3">Status Pembayaran : </label>
-                                <select name="status" class="form-control" style="width:40%" id="">
-                                    <option>Belum dibayar</option>
-                                    <option>Sudah dibayar</option>
-                                </select>
-                        </div>
-                    </div>
-                    
-                </div>
                 <div class="row mt-5">
                     <div class="col-lg-5 mx-auto">
                         <div class="form-group">

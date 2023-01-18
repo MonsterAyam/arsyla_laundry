@@ -91,13 +91,13 @@
             @csrf
               <div class="col-lg-12">
                   <div class="form-group">
-                      <input type="text" name="nama_pelanggan" placeholder="Nama Pelanggan" id="username" class="form-control">
+                      <input type="text" required name="nama_pelanggan" placeholder="Nama Pelanggan" id="username" class="form-control">
                   </div>
                   <div class="form-group">
-                      <textarea name="address" placeholder="Alamat" id="" cols="3" rows="3" class="form-control"></textarea>
+                      <textarea name="address" required placeholder="Alamat" id="" cols="3" rows="3" class="form-control"></textarea>
                 </div>
                   <div class="form-group">
-                      <input type="number" placeholder="Nomor Telepon" name="no_telp" id="" class="form-control">
+                      <input type="number" required placeholder="Nomor Telepon" name="no_telp" id="" class="form-control">
                   </div>
                   <div class="form-group">
                       <button type="submit" class="btn btn-primary w-100 my-3">Simpan</button>                  

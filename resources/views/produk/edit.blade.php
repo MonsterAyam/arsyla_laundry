@@ -33,19 +33,19 @@
                     <div class="col-lg-5">
                         <div class="form-group">
                             <label for="status">Kode</label>
-                            <input type="text" name="kode" value="{{ $data->kode }}" id="" class="form-control">
+                            <input type="text" name="kode" required value="{{ $data->kode }}" id="" class="form-control">
                         </div>
                     </div>
                     <div class="col-lg-5">
                         <div class="form-group">
                             <label for="total">Nama</label>
-                            <input id="" name="nama" value="{{ $data->nama }}" class="form-control">
+                            <input id="" name="nama" required value="{{ $data->nama }}" class="form-control">
                         </div>
                       </div>
                     <div class="col-lg-5">
                         <div class="form-group">
                             <label for="total">Harga</label>
-                            <input id="" name="harga_jual" value="{{ $data->harga_jual }}" class="form-control">
+                            <input id="" name="harga_jual" required value="{{ $data->harga_jual }}" class="form-control">
                         </div>
                       </div>
                       <div class="w-100 mt-3">
