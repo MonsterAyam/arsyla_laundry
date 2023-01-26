@@ -16,10 +16,11 @@
                             <form action="/dashboard/cart" method="POST">
                                 @csrf
                                 <div class="form-group">
-                                    <select name="lang" class="js-searchBox" style="display: none;">
-                                        <option value="--Pilih Produk--" disabled selected>--Pilih Produk--</option>
+                                    <label for="#dropdown" class="text-dark" style="width:600px">Pilih Produk</label>
+                                    <select name="lang" class="js-searchBox" id="dropdown" style="display: none;" >
+                                        <option value="" disabled selected></option>
                                         @foreach ( $produk as $pk )
-                                        <option value="{{ $pk->id }}">{{ $pk->kode }}({{ $pk->harga_jual }}) </option>
+                                        <option value="{{ $pk->id }}">{{ $pk->kode }} ({{ $pk->harga_jual }}) {{ $pk->jenis_produk }} </option>
                                         @endforeach
                                     </select>
                                     @error('lang')

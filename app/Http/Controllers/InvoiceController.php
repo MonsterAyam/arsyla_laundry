@@ -24,8 +24,7 @@ class InvoiceController extends Controller
             $data = Invoice::query()->latest()
                 ->where(function ($query) use ($searchTerm) {
                     if ($searchTerm) {
-                        $query->where('tanggal_dibayar', 'like', '%' . $searchTerm . '%')
-                            ->orWhere('grand_total', 'like', '%' . $searchTerm . '%');
+                        $query->whereDate('created_at', $searchTerm);
                     }
                 })
                 ->paginate(10);
@@ -47,7 +46,6 @@ class InvoiceController extends Controller
      */
     public function create()
     {
-
         return view('transaksi.create', [
             "pelanggan" => Pelanggan::all(),
             "produk" => Produk::all(),
@@ -125,7 +123,6 @@ class InvoiceController extends Controller
         return back()->with('success', 'Transaksi Berhasil Dihapus!');
     }
 
-
     public function print($id)
     {
         $html = view('cetak_laporan.pdf', [
@@ -133,6 +130,47 @@ class InvoiceController extends Controller
             "data" => Transaksi::where('invoice_id', $id)->get()
         ]);
 
+        // instantiate and use the dompdf class
+        $options = new Options();
+        $options->set('defaultFont', 'Times New Roman');
+        $dompdf = new Dompdf($options);
+        $dompdf = new Dompdf();
+        $dompdf->loadHtml($html);
+
+        // (Optional) Setup the paper size and orientation
+        $dompdf->setPaper('A4', 'potrait');
+
+        // Render the HTML as PDF
+        $dompdf->render();
+
+        // Output the generated PDF to Browser
+        $dompdf->stream();
+    }
+
+    public function cetak_laporan(Request $request)
+    {
+        if ($request->get('tanggal_dari') && $request->get('tanggal_sampai')) {
+            $data = Invoice::query()
+                ->where('tanggal_dibayar', '>=', $request->get('tanggal_dari'))
+                ->where('tanggal_dibayar', '<=', $request->get('tanggal_sampai'))
+                ->latest()
+                ->paginate(10);
+            return view('laporan_transaksi.index', [
+                "title" => "data pelanggan",
+                "data" => $data
+            ]);
+        } else {
+            return view('laporan_transaksi.index', [
+                "data" => Invoice::query()->latest()->paginate(10)
+            ]);
+        }
+    }
+
+    public function cetak_pdf()
+    {
+        $html = view('cetak_laporan.transaksi', [
+            "data" => Invoice::paginate(10)
+        ]);
 
         // instantiate and use the dompdf class
         $options = new Options();

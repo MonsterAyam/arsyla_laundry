@@ -15,14 +15,6 @@
                             <button class="btn btn-primary" data-toggle="modal" data-target="#staticBackdrop">+ Tambah Data</button>  
                         @endcan
                     </div>
-                    <div class="col-3">
-                        <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
-                            <div class="input-group">
-                                <input type="search" name="search" class="form-control" id="inlineFormInputGroupUsername">
-                                <button type="submit" class="btn btn-primary rounded-0">Search</button>
-                            </div>
-                        </form>
-                    </div>
                 </div>
             </div>
             <div class="card-body">
@@ -53,7 +45,7 @@
                                 <td>{{ $pr->jenis_produk }}</td>
                                 <td>{{ $pr->kode }}</td>
                                 <td>{{ $pr->nama }}</td>
-                                <td>{{ $pr->harga_jual }}</td>
+                                <td>{{ "Rp " . number_format($pr->harga_jual ,0,',','.'); }}</td>
                                 @can('admin')
                                     <td class="d-flex">
                                         <a href="/dashboard/master/produk/{{ $pr->id }}/edit" class="btn btn-warning border-0 mx-2">

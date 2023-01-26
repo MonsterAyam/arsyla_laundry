@@ -85,7 +85,7 @@
                 $('.js-searchBox').searchBox({
                       mode: 2,
                       optionMaxSize: 80,
-                      elementWidth: '300',
+                      elementWidth: '380',
                       selectCallback: null
                 });
             });

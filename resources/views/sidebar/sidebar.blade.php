@@ -75,20 +75,35 @@
             <li class="nav-item side">
                 <a class="nav-link" href="/dashboard/user">
                     <i class="fas fa-fw fa-user"></i>           
-                <span>Pengguna</span></a>
+                    <span>Pengguna</span></a>
                 </li>
                 {{-- <!-- Nav Item - Utilities Collapse Menu -->
-                <li class="nav-item side">
-                    <a class="nav-link" href="index.html">
-                        <i class="fas fa-fw fa-cog"></i>           
-                        <span>Hak Akses</span></a>
-                    </li> --}}
-                    
-    @endcan
-                <!-- Divider -->
-    <hr class="sidebar-divider d-none d-md-block">
-
-    <!-- Sidebar Toggler (Sidebar) -->
+                    <li class="nav-item side">
+                        <a class="nav-link" href="index.html">
+                            <i class="fas fa-fw fa-cog"></i>           
+                            <span>Hak Akses</span></a>
+                        </li> --}}
+                        
+                        @endcan
+                        <li class="nav-item side {{ Request::is('dashboard/cetak_laporan/*') ? 'active' : '' }}">
+                            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTree"
+                            aria-expanded="true" aria-controls="collapseTree">
+                            <i class="fas fa-table"></i>
+                            <span>Cetak Laporan</span>
+                        </a>
+                        <div id="collapseTree" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                            <div class="bg-white py-2 collapse-inner rounded">
+                                <h6 class="collapse-header">Kategori</h6>
+                                <a class="collapse-item" href="/dashboard/cetak_laporan/laporan_transaksi">Laporan Transaksi</a>
+                                <a class="collapse-item" href="/dashboard/cetak_laporan/laporan_jenis_pengeluaran">Laporan Jenis Pengeluaran</a>
+                                <a class="collapse-item" href="/dashboard/cetak_laporan/laporan_produk">Laporan Produk</a>
+                            </div>
+                        </div>
+                    </li>
+                        <!-- Divider -->
+                        <hr class="sidebar-divider d-none d-md-block">
+                        
+                        <!-- Sidebar Toggler (Sidebar) -->
     <div class="text-center d-none d-md-inline">
         <button class="rounded-circle border-0" id="sidebarToggle"></button>
     </div>

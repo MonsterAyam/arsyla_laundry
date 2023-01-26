@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\JenisPengeluaran;
+use Dompdf\Dompdf;
+use Dompdf\Options;
 
 class JenisPengeluaranController extends Controller
 {
@@ -14,16 +16,11 @@ class JenisPengeluaranController extends Controller
      */
     public function index(Request $request)
     {
-        if ($request->get('search')) {
-            $searchTerm = $request->get('search');
+        if ($request->get('tanggal_dari') && $request->get('tanggal_sampai')) {
             $data = JenisPengeluaran::query()
-                ->where(function ($query) use ($searchTerm) {
-                    if ($searchTerm) {
-                        $query->where('nama_jenis_pengeluaran', 'like', '%' . $searchTerm . '%')
-                            ->orWhere('total_harga', 'like', '%' . $searchTerm . '%')
-                            ->orWhere('keterangan', 'like', '%' . $searchTerm . '%')->get();
-                    }
-                })
+                ->where('tanggal_dibayar', '>=', $request->get('tanggal_dari'))
+                ->where('tanggal_dibayar', '<=', $request->get('tanggal_sampai'))
+                ->latest()
                 ->paginate(10);
             return view('jenis_pengeluaran.index', [
                 "data" => $data
@@ -121,5 +118,52 @@ class JenisPengeluaranController extends Controller
         JenisPengeluaran::destroy($jenisPengeluaran->id);
 
         return back()->with('success', 'Data Pengeluaran Berhasil Dihapus!');
+    }
+
+    public function cetak_laporan(Request $request)
+    {
+        if ($request->get('search')) {
+            $searchTerm = $request->get('search');
+            $data = JenisPengeluaran::query()
+                ->where(function ($query) use ($searchTerm) {
+                    if ($searchTerm) {
+                        $query->where('nama_jenis_pengeluaran', 'like', '%' . $searchTerm . '%')
+                            ->orWhere('total_harga', 'like', '%' . $searchTerm . '%')
+                            ->orWhere('keterangan', 'like', '%' . $searchTerm . '%')->get();
+                    }
+                })
+                ->paginate(10);
+            return view('laporan_jenis_pengeluaran.index', [
+                "data" => $data
+            ]);
+        } else {
+            return view('laporan_jenis_pengeluaran.index', [
+                "data" => JenisPengeluaran::query()->orderBy('nama_jenis_pengeluaran', 'asc')
+                    ->paginate(10)
+            ]);
+        }
+    }
+
+    public function cetak_pdf()
+    {
+        $html = view('cetak_laporan.jenis_pengeluaran', [
+            "data" => JenisPengeluaran::paginate(10)
+        ]);
+
+        // instantiate and use the dompdf class
+        $options = new Options();
+        $options->set('defaultFont', 'Times New Roman');
+        $dompdf = new Dompdf($options);
+        $dompdf = new Dompdf();
+        $dompdf->loadHtml($html);
+
+        // (Optional) Setup the paper size and orientation
+        $dompdf->setPaper('A4', 'potrait');
+
+        // Render the HTML as PDF
+        $dompdf->render();
+
+        // Output the generated PDF to Browser
+        $dompdf->stream();
     }
 }

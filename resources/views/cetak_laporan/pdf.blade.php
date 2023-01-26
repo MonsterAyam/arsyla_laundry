@@ -28,9 +28,7 @@
 
 
 <div class="container-fluid">
-
             <h2 style="text-align:center; margin:0 auto; font-weight:bold; border-bottom:4px solid black;">Arsyila Laundry</h2>
-    
         <!-- DataTales Example -->
         <div class="card shadow mb-4">
             <div class="card-header py-3">
@@ -51,7 +49,7 @@
                                 <th>Nama Produk</th>
                                 <th>Harga</th>
                                 <th>Qty/Kg</th>
-                                <th>Tanggal pesanan</th>
+                                <th>Tanggal Selesai</th>
                                 <th>Sub Total</th>
                             </tr>
                         </thead>

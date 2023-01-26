@@ -60,11 +60,11 @@
                                         <div class="form-group">
                                             <input type="text" value="{{ old('username') }}" name="username" class="form-control form-control-user"
                                                 id="exampleInputEmail" 
-                                                placeholder="Masukan Username...">
+                                                required placeholder="Masukan Username...">
                                         </div>
                                         <div class="form-group">
                                             <input type="password" name="password" class="form-control form-control-user"
-                                                id="exampleInputPassword" placeholder="Password">
+                                                id="exampleInputPassword" required placeholder="Password">
                                         </div>
                                         <div class="form-group">
                                             <div class="custom-control custom-checkbox small">

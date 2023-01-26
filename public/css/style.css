@@ -48,3 +48,7 @@ ul > li.nav-item.side:hover{
   .refineText{
     padding: 8px 0 8px 0 !important;
   }
+
+  #box-dropdown {
+    width: 1000px !important;
+  }

@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Produk;
+use Dompdf\Dompdf;
+use Dompdf\Options;
 
 class ProdukController extends Controller
 {
@@ -122,5 +124,35 @@ class ProdukController extends Controller
         Produk::destroy($produk->id);
 
         return back()->with('success', 'Data Produk Berhasil Dihapus!');
+    }
+
+    public function cetak_laporan(Request $request)
+    {
+        return view('laporan_produk.index', [
+            "data" => Produk::paginate(10)
+        ]);
+    }
+
+    public function cetak_pdf(Request $request)
+    {
+        $html = view('cetak_laporan.produk', [
+            "data" => Produk::paginate(10)
+        ]);
+
+        // instantiate and use the dompdf class
+        $options = new Options();
+        $options->set('defaultFont', 'Times New Roman');
+        $dompdf = new Dompdf($options);
+        $dompdf = new Dompdf();
+        $dompdf->loadHtml($html);
+
+        // (Optional) Setup the paper size and orientation
+        $dompdf->setPaper('A4', 'potrait');
+
+        // Render the HTML as PDF
+        $dompdf->render();
+
+        // Output the generated PDF to Browser
+        $dompdf->stream();
     }
 }

@@ -11,16 +11,14 @@
             <div class="card-header py-3">
               <div class="row d-flex justify-content-between">
                 <div class="col-3">
-                  <button class="btn btn-primary" data-toggle="modal" data-target="#staticBackdrop">+ Tambah</button>
+                  <a class="btn btn-primary" href="/dashboard/cetak_laporan/laporan_jenis_pengeluaran/jenis_pengeluaran_pdf">Cetak</a>
                 </div>
-                <div class="col-3">
-                  <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
-                    <div class="input-group">
-                        <input type="search" name="search" class="form-control" id="inlineFormInputGroupUsername">
-                        <button type="submit" class="btn btn-primary rounded-0">Search</button>
-                    </div>
-                  </form>
-                </div>
+                <form class="form-inline">
+                  <label class="fs-1 p-3">Tanggal</label>
+                  <input type="date" name="tanggal_dari" class="form-control mb-2 mr-sm-2" id="inlineFormInputName2" placeholder="Jane Doe">
+                  <input type="date" name="tanggal_sampai" class="form-control mb-2 mr-sm-2" id="inlineFormInputName2" placeholder="Jane Doe">
+                  <button type="submit" class="btn btn-primary">Filter</button>
+                </form>
               </div>
             </div>
             <div class="card-body">
@@ -31,9 +29,6 @@
                                 <th style="width: 30px">No.</th>
                                 <th>Nama Jenis Pengeluaran</th>
                                 <th>Tanggal</th>
-                                @can('admin')
-                                  <th style="width:200px">Aksi</th>
-                                @endcan
                             </tr>
                         </thead>
                         <tbody>
@@ -43,27 +38,12 @@
                             @foreach ($data as $jp)
                             <tr>
                                 <td>{{ $data->firstItem()+$loop->index }}</td>
-                                <td>{{ $jp->nama_jenis_pengeluaran }}</td>        
-                                @can('admin')
-                                <td>{{ $jp->created_at }}</td>
-                                  <td align="center" class="p-4" style="display: flex;">
-                                    <a href="/dashboard/master/jenis_pengeluaran/{{ $jp->id }}/edit" class="btn btn-warning border-0 mx-2">
-                                        <i class="fas fa-fw fa-edit"></i>
-                                    </a>
-                                    <form action="/dashboard/master/jenis_pengeluaran/{{ $jp->id }}" method="POST">
-                                      @method('delete')
-                                      @csrf
-                                      <button type="submit" onclick="return confirm('Anda yakin ingin menghapus record berikut?');" class="btn btn-danger border-0 mx-2">
-                                          <i class="fas fa-fw fa-trash"></i>
-                                      </button>
-                                  </form>
-                                  </td>
-                                @endcan                      
+                                <td>{{ $jp->nama_jenis_pengeluaran }}</td>          
+                                <td>{{ $jp->created_at }}</td>          
                             </tr>
                             @endforeach
                         </tbody>
                     </table>
-                    {{ $data->links() }}
                 </div>
             </div>
         </div>
@@ -108,11 +88,5 @@
       </div>
     </div>
   </div>
-
-
-
-
-
-
 
 @endsection

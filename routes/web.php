@@ -13,6 +13,8 @@ use App\Http\Controllers\ProdukController;
 use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\CartController;
 use App\Models\JenisPengeluaran;
+use Illuminate\Http\Request;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -42,28 +44,56 @@ Route::get('/dashboard', function () {
 })->middleware('auth');
 
 
-
-Route::get('/dashboard/laporan', function () {
-    return view('laporan_laba/rugi.index', [
-        "pendapatan" => Invoice::select(
-            "id",
-            DB::raw("(sum(grand_total)) as total_pendapatan"),
-            DB::raw("(DATE_FORMAT(created_at, '%d-%m-%Y')) as per_bulan")
-        )
-            ->orderBy('created_at')
-            ->groupBy(DB::raw("DATE_FORMAT(created_at, '%d-%m-%Y')"))
-            ->get(),
-        "kerugian" => JenisPengeluaran::select(
-            "id",
-            DB::raw("(sum(total_harga)) as total_kerugian"),
-            DB::raw("(DATE_FORMAT(created_at, '%d-%m-%Y')) as per_bulan")
-        )
-            ->orderBy('created_at')
-            ->groupBy(DB::raw("DATE_FORMAT(created_at, '%d-%m-%Y')"))
-            ->get()
-    ]);
+Route::get('/dashboard/laporan', function (Request $request) {
+    if ($request->get('tanggal_dari') && $request->get('tanggal_sampai')) {
+        return view('laporan_laba/rugi.index', [
+            "pendapatan" => DB::table('invoices')
+                ->select(DB::raw('DATE(tanggal_dibayar) as per_bulan, SUM(grand_total) as total_pendapatan'))
+                ->where('tanggal_dibayar', '>=', $request->get('tanggal_dari'))
+                ->where('tanggal_dibayar', '<=', $request->get('tanggal_sampai'))
+                ->where('status', 'sudah dibayar')
+                ->groupBy('per_bulan')
+                ->get(),
+            "kerugian" => DB::table('jenis_pengeluarans')
+                ->select(DB::raw('DATE(created_at) as per_bulan, SUM(total_harga) as total_kerugian'))
+                ->where('created_at', '>=', $request->get('tanggal_dari'))
+                ->where('created_at', '<=', $request->get('tanggal_sampai'))
+                ->groupBy('per_bulan')
+                ->get()
+        ]);
+    } else {
+        return view('laporan_laba/rugi.index', [
+            "pendapatan" => Invoice::select(
+                "id",
+                DB::raw("(sum(grand_total)) as total_pendapatan"),
+                DB::raw("(DATE_FORMAT(tanggal_dibayar, '%d-%m-%Y')) as per_bulan")
+            )
+                ->orderBy('tanggal_dibayar')
+                ->where('status', 'sudah dibayar')
+                ->groupBy(DB::raw("DATE_FORMAT(tanggal_dibayar, '%d-%m-%Y')"))
+                ->get(),
+            "kerugian" => JenisPengeluaran::select(
+                "id",
+                DB::raw("(sum(total_harga)) as total_kerugian"),
+                DB::raw("(DATE_FORMAT(created_at, '%d-%m-%Y')) as per_bulan")
+            )
+                ->orderBy('created_at')
+                ->groupBy(DB::raw("DATE_FORMAT(created_at, '%d-%m-%Y')"))
+                ->get()
+        ]);
+    }
 })->middleware('admin');
 
+Route::get('/dashboard/cetak_laporan/laporan_transaksi', [InvoiceController::class, 'cetak_laporan']);
+
+Route::get('/dashboard/cetak_laporan/laporan_transaksi/transaksi_pdf', [InvoiceController::class, 'cetak_pdf']);
+
+Route::get('/dashboard/cetak_laporan/laporan_jenis_pengeluaran', [JenisPengeluaranController::class, 'cetak_laporan']);
+
+Route::get('/dashboard/cetak_laporan/laporan_jenis_pengeluaran/jenis_pengeluaran_pdf', [ProdukController::class, 'cetak_pdf']);
+
+Route::get('/dashboard/cetak_laporan/laporan_produk', [ProdukController::class, 'cetak_laporan']);
+Route::get('/dashboard/cetak_laporan/produk/cetak_pdf', [ProdukController::class, 'cetak_pdf']);
 
 
 

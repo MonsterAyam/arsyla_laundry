@@ -43,12 +43,12 @@
                                 <td>{{ $i->produk->harga_jual }}</td>
                                 <td>{{ $i->qty }}</td>
                                 <td>{{ $i->invoice->batas_waktu }}</td>
-                                <td>{{ $i->total_akhir }}</td>
+                                <td>{{ "Rp " . number_format($i->total_akhir ,0,',','.'); }}</td>
                             </tr>
                             
                             @endforeach
                             <tr align="center" class="font-weight-bold">
-                                <td colspan="7">Grand Total : {{ $data_pg->grand_total }}</td> 
+                                <td colspan="7">Grand Total : {{ "Rp " . number_format($data_pg->grand_total ,0,',','.'); }}</td> 
                             </tr>
                         </tbody>
                     </table>

@@ -12,10 +12,10 @@
             <div class="card-header py-3">
                 <form class="form-inline">
                     <label class="fs-1 p-3">Tanggal</label>
-                    <input type="date" class="form-control mb-2 mr-sm-2" id="inlineFormInputName2" placeholder="Jane Doe">
-                    <input type="date" class="form-control mb-2 mr-sm-2" id="inlineFormInputName2" placeholder="Jane Doe">
+                    <input type="date" name="tanggal_dari" class="form-control mb-2 mr-sm-2" id="inlineFormInputName2" placeholder="Jane Doe">
+                    <input type="date" name="tanggal_sampai" class="form-control mb-2 mr-sm-2" id="inlineFormInputName2" placeholder="Jane Doe">
+                    <button type="submit" class="btn btn-primary">Filter</button>
                   </form>
-                <button class="btn btn-primary">Filter</button>
             </div>
             <div class="card-body">
                 <div class="table-responsive">
@@ -35,14 +35,14 @@
                            <tr>
                                <td>{{ $loop->iteration }}</td>
                                <td>{{ $p->per_bulan }}</td>
-                               <td>{{ $p->total_pendapatan }}</td>
+                               <td>{{ "Rp " . number_format($p->total_pendapatan ,0,',','.'); }}</td>
                            </tr>
                         @endforeach
                         </tbody>
                         <thead class="bg-gradient-danger text-light">
                             <tr align="center">
                                 <th>No.</th>
-                                <th>Per-Bulam</th>
+                                <th>Per-Bulan</th>
                                 <th>Kerugian</th>
                             </tr>
                         </thead>
@@ -51,7 +51,7 @@
                            <tr>
                                <td>{{ $loop->iteration }}</td>
                                <td>{{ $k->per_bulan }}</td>
-                               <td>{{ $k->total_kerugian }}</td>
+                               <td>{{ "Rp " . number_format($k->total_kerugian ,0,',','.'); }}</td>
                            </tr>
                         @endforeach
                         

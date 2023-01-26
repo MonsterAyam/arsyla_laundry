@@ -11,22 +11,14 @@
             <div class="card-header py-3">
                 <div class="row d-flex justify-content-between">
                     <div class="col-3">
-                        <a href="/dashboard/invoice/create" class="btn btn-primary">+ Tambah Data</a>
+                        <a href="/dashboard/cetak_laporan/laporan_transaksi/transaksi_pdf" class="btn btn-primary">Cetak Laporan</a>
                     </div>
-                    <div class="col-3 d-flex">
-                            {{-- <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0 mx-3">
-                                <div class="input-group">
-                                    <input type="search" name="nameSearch" class="form-control" id="inlineFormInputGroupUsername">
-                                    <button type="submit" class="btn btn-primary rounded-0">Search</button>
-                                </div>
-                            </form> --}}
-                            <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
-                                <div class="input-group">
-                                    <input type="date" name="search" class="form-control" id="inlineFormInputGroupUsername">
-                                    <button type="submit" class="btn btn-primary rounded-0">Search</button>
-                                </div>
-                            </form>
-                    </div>
+                    <form class="form-inline">
+                        <label class="fs-1 p-3">Tanggal</label>
+                        <input type="date" name="tanggal_dari" class="form-control mb-2 mr-sm-2" id="inlineFormInputName2" placeholder="Jane Doe">
+                        <input type="date" name="tanggal_sampai" class="form-control mb-2 mr-sm-2" id="inlineFormInputName2" placeholder="Jane Doe">
+                        <button type="submit" class="btn btn-primary">Filter</button>
+                    </form>
                 </div>
             </div>
             <div class="card-body">
@@ -42,8 +34,6 @@
                                 <th>Batas Waktu</th>
                                 <th>Tanggal Dibayar</th>
                                 <th class="text-center" style="width: 120px">Total</th>
-                                <th>Nota</th>
-                                <th>Aksi</th>
                             </tr>
                         </thead>
                         <tbody align="center">
@@ -70,27 +60,6 @@
                                 <td>menunggu</td>
                                 @endif
                                 <td>{{"Rp " . number_format($i->grand_total,0,',','.'); }}</td>
-                                <td>
-                                    <a href="/dashboard/invoice/print/{{ $i->id }}" class="d-none d-sm-inline-block btn btn-sm btn-danger shadow-sm"><i
-                                        class="fas fa-download fa-sm text-white-50"></i>Nota</a>
-                                </td>
-                                <td class="p-4" style="display: flex;">
-                                    <a href="/dashboard/invoice/detail{{ $i->id }}" class="btn btn-sm btn-primary border-0 mx-1">
-                                        <i class="fas fa-fw fa-info"></i>
-                                    </a>
-                                    <a href="/dashboard/invoice/{{ $i->id }}/edit" class="btn btn-sm btn-warning border-0 mx-1">
-                                        <i class="fas fa-fw fa-edit"></i>
-                                    </a>
-                                    @can('admin')
-                                        <form action="/dashboard/invoice/{{ $i->id }}" method="POST">
-                                            @method('delete')
-                                            @csrf
-                                            <button type="submit" onclick="return confirm('Anda yakin ingin menghapus record berikut?');" class="btn btn-sm btn-danger mx-1">
-                                                <i class="fas fa-fw fa-trash"></i>
-                                            </button>
-                                        </form>
-                                    @endcan
-                                </td>
                             </tr>
                             
                             @endforeach

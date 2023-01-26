@@ -4,23 +4,21 @@
 
  <!-- Page Heading -->
  <div class="d-sm-flex align-items-center justify-content-between mb-4">
-    <h1 class="h3 mb-0 text-gray-800">Jenis Pengeluaran</h1>
+    <h1 class="h3 mb-0 text-gray-800">Produk</h1>
 </div>
         <!-- DataTales Example -->
         <div class="card shadow mb-4">
             <div class="card-header py-3">
               <div class="row d-flex justify-content-between">
                 <div class="col-3">
-                  <button class="btn btn-primary" data-toggle="modal" data-target="#staticBackdrop">+ Tambah</button>
+                  <a class="btn btn-primary" href="/dashboard/cetak_laporan/produk/cetak_pdf">Cetak</a>
                 </div>
-                <div class="col-3">
-                  <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
-                    <div class="input-group">
-                        <input type="search" name="search" class="form-control" id="inlineFormInputGroupUsername">
-                        <button type="submit" class="btn btn-primary rounded-0">Search</button>
-                    </div>
-                  </form>
-                </div>
+                <form class="form-inline">
+                  <label class="fs-1 p-3">Tanggal</label>
+                  <input type="date" name="tanggal_dari" class="form-control mb-2 mr-sm-2" id="inlineFormInputName2" placeholder="Jane Doe">
+                  <input type="date" name="tanggal_sampai" class="form-control mb-2 mr-sm-2" id="inlineFormInputName2" placeholder="Jane Doe">
+                  <button type="submit" class="btn btn-primary">Filter</button>
+                </form>
               </div>
             </div>
             <div class="card-body">
@@ -29,41 +27,24 @@
                         <thead class="bg-primary text-light">
                             <tr align="center">
                                 <th style="width: 30px">No.</th>
-                                <th>Nama Jenis Pengeluaran</th>
+                                <th>Nama Produk</th>
+                                <th>Kode</th>
+                                <th>Harga Jual</th>
                                 <th>Tanggal</th>
-                                @can('admin')
-                                  <th style="width:200px">Aksi</th>
-                                @endcan
                             </tr>
                         </thead>
                         <tbody>
-                          @if (empty($data))
-                          <td colspan="6" align="center">Tidak Ada Produk!</td>
-                          @endif
                             @foreach ($data as $jp)
                             <tr>
                                 <td>{{ $data->firstItem()+$loop->index }}</td>
-                                <td>{{ $jp->nama_jenis_pengeluaran }}</td>        
-                                @can('admin')
-                                <td>{{ $jp->created_at }}</td>
-                                  <td align="center" class="p-4" style="display: flex;">
-                                    <a href="/dashboard/master/jenis_pengeluaran/{{ $jp->id }}/edit" class="btn btn-warning border-0 mx-2">
-                                        <i class="fas fa-fw fa-edit"></i>
-                                    </a>
-                                    <form action="/dashboard/master/jenis_pengeluaran/{{ $jp->id }}" method="POST">
-                                      @method('delete')
-                                      @csrf
-                                      <button type="submit" onclick="return confirm('Anda yakin ingin menghapus record berikut?');" class="btn btn-danger border-0 mx-2">
-                                          <i class="fas fa-fw fa-trash"></i>
-                                      </button>
-                                  </form>
-                                  </td>
-                                @endcan                      
+                                <td>{{ $jp->kode }}</td>          
+                                <td>{{ $jp->nama }}</td>          
+                                <td>{{ $jp->harga_jual }}</td>          
+                                <td>{{ $jp->created_at }}</td>          
                             </tr>
                             @endforeach
                         </tbody>
                     </table>
-                    {{ $data->links() }}
                 </div>
             </div>
         </div>
@@ -98,9 +79,9 @@
                     <textarea name="keterangan" required id="" style="resize:none" placeholder="Keterangan" cols="3" rows="3" class="form-control"></textarea>
                   </div>
                   <div class="form-group">
-                      <button type="submit" class="btn btn-primary w-100 my-3">Simpan</button>                  
+                    <button type="submit" class="btn btn-primary w-100 my-3">Simpan</button>                  
                 </div>
-              </div>
+            </div>
           </form>
         </div>
         <div class="modal-footer">
@@ -108,11 +89,5 @@
       </div>
     </div>
   </div>
-
-
-
-
-
-
 
 @endsection
