@@ -15,7 +15,8 @@
                     <input type="date" name="tanggal_dari" class="form-control mb-2 mr-sm-2" id="inlineFormInputName2" placeholder="Jane Doe">
                     <input type="date" name="tanggal_sampai" class="form-control mb-2 mr-sm-2" id="inlineFormInputName2" placeholder="Jane Doe">
                     <button type="submit" class="btn btn-primary">Filter</button>
-                  </form>
+                </form>
+                <a href="/dashboard/laporan/cetak_pdf" class="btn btn-primary">Cetak Laporan</a>
             </div>
             <div class="card-body">
                 <div class="table-responsive">
@@ -43,7 +44,7 @@
                             <tr align="center">
                                 <th>No.</th>
                                 <th>Per-Bulan</th>
-                                <th>Kerugian</th>
+                                <th>Pengeluaran</th>
                             </tr>
                         </thead>
                         <tbody align="center">

@@ -27,8 +27,8 @@
                     </div>
                     <div class="col-lg-10">
                       <div class="form-group">
-                          <label for="nama">Nama Pengguna</label>
-                          <input type="text" required value="{{ old('name', $data->name) }}" name="name" id="nama" class="form-control">
+                        <label for="nama">Nama Pengguna</label>
+                        <input type="text" required value="{{ old('name', $data->name) }}" name="name" id="nama" class="form-control">
                       </div>
                     </div>
                     <div class="col-lg-10">

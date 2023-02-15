@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\DB;
 use App\Models\Invoice;
 use App\Models\Transaksi;
 use App\Models\Produk;
@@ -19,18 +20,17 @@ class InvoiceController extends Controller
      */
     public function index(Request $request)
     {
-        if ($request->get('search')) {
-            $searchTerm = $request->get('search');
-            $data = Invoice::query()->latest()
-                ->where(function ($query) use ($searchTerm) {
-                    if ($searchTerm) {
-                        $query->whereDate('created_at', $searchTerm);
-                    }
-                })
-                ->paginate(10);
+        if ($request->get('pelanggan')) {
+            $result = DB::table('invoices')
+                ->join('pelanggans', 'invoices.pelanggan_id', '=', 'pelanggans.id')
+                ->select('invoices.*')
+                ->where('pelanggans.nama_pelanggan', '=', $request->get('pelanggan'))
+                ->whereBetween('invoices.created_at', [$request->get('date-dari'), $request->get('date-sampai')])
+                ->paginate(10); // Menggunakan metode paginate() untuk menghasilkan objek kelas LengthAwarePaginator
+
             return view('transaksi.index', [
                 "title" => "data pelanggan",
-                "data" => $data
+                "data" => $result // Mengembalikan hasil dalam bentuk koleksi (collection)
             ]);
         } else {
             return view('transaksi.index', [

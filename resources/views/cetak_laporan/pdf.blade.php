@@ -42,7 +42,7 @@
             <br><br>
             <div class="card-body">
                 <div class="table-responsive">
-                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <table border="1" cellpadding="2" class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                         <thead>
                             <tr align="center">
                                 <th>No.</th>
@@ -72,6 +72,20 @@
                             </tr>
                         </tbody>
                     </table>
+                    <br/>
+                    <div class="row">
+                        <h3><b>PERHATIAN!!</b></h3>
+                        <ol>
+                            <li>Komplain kami layani 1 X 24 jam disertakan Nota Transaksi</li>
+                            <li>Cucian yang tidak layak dikerjakan akan dikembalikan / dibuang</li>
+                        </ol>
+                        <h3><b>KAMI TIDAK BERTANGGUNG JAWAB ATAS :</b></h3>
+                        <ol>
+                            <li>Susut atau luntur karena sifat bahannya</li>
+                            <li>Barang berharga yang terbawa didalam cucian</li>
+                            <li>Cucian hilang atau rusak dalam musibah banjir atau kebakaran</li>
+                        </ol>
+                    </div>
                 </div>
             </div>
         </div>

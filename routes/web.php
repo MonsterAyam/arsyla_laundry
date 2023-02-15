@@ -14,6 +14,8 @@ use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\CartController;
 use App\Models\JenisPengeluaran;
 use Illuminate\Http\Request;
+use Dompdf\Dompdf;
+use Dompdf\Options;
 
 
 /*
@@ -27,8 +29,7 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::get('/', function () {
-});
+Route::get('/', [LoginController::class, 'index'])->name('login');
 
 Route::get('/login', [LoginController::class, 'index'])->name('login');
 Route::post('/login/authenticate', [LoginController::class, 'authenticate']);
@@ -83,6 +84,44 @@ Route::get('/dashboard/laporan', function (Request $request) {
         ]);
     }
 })->middleware('admin');
+
+Route::get('/dashboard/laporan/cetak_pdf', function () {
+    $html = view('cetak_laporan.laba_rugi', [
+        "pendapatan" => Invoice::select(
+            "id",
+            DB::raw("(sum(grand_total)) as total_pendapatan"),
+            DB::raw("(DATE_FORMAT(tanggal_dibayar, '%d-%m-%Y')) as per_bulan")
+        )
+            ->orderBy('tanggal_dibayar')
+            ->where('status', 'sudah dibayar')
+            ->groupBy(DB::raw("DATE_FORMAT(tanggal_dibayar, '%d-%m-%Y')"))
+            ->get(),
+        "kerugian" => JenisPengeluaran::select(
+            "id",
+            DB::raw("(sum(total_harga)) as total_kerugian"),
+            DB::raw("(DATE_FORMAT(created_at, '%d-%m-%Y')) as per_bulan")
+        )
+            ->orderBy('created_at')
+            ->groupBy(DB::raw("DATE_FORMAT(created_at, '%d-%m-%Y')"))
+            ->get()
+    ]);
+
+    // instantiate and use the dompdf class
+    $options = new Options();
+    $options->set('defaultFont', 'Times New Roman');
+    $dompdf = new Dompdf($options);
+    $dompdf = new Dompdf();
+    $dompdf->loadHtml($html);
+
+    // (Optional) Setup the paper size and orientation
+    $dompdf->setPaper('A4', 'potrait');
+
+    // Render the HTML as PDF
+    $dompdf->render();
+
+    // Output the generated PDF to Browser
+    $dompdf->stream();
+});
 
 Route::get('/dashboard/cetak_laporan/laporan_transaksi', [InvoiceController::class, 'cetak_laporan']);
 

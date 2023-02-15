@@ -58,13 +58,23 @@
                                     <form action="/login/authenticate" method="POST" class="user animated--grow-in">
                                         @csrf
                                         <div class="form-group">
-                                            <input type="text" value="{{ old('username') }}" name="username" class="form-control form-control-user"
+                                            <input type="text" value="{{ old('username') }}" name="username" class="form-control form-control-user @error('username')
+                                                is-invalid
+                                            @enderror "
                                                 id="exampleInputEmail" 
                                                 required placeholder="Masukan Username...">
+                                                @error('username')
+                                                <div class="invalid-feedback">{{ $message }}</div>                                                    
+                                                @enderror
                                         </div>
                                         <div class="form-group">
-                                            <input type="password" name="password" class="form-control form-control-user"
+                                            <input type="password" name="password" class="form-control @error('password')
+                                                is-invalid
+                                            @enderror form-control-user"
                                                 id="exampleInputPassword" required placeholder="Password">
+                                                @error('password')
+                                                    <div class="invalid-feedback">{{ $message }}</div>
+                                                @enderror
                                         </div>
                                         <div class="form-group">
                                             <div class="custom-control custom-checkbox small">
