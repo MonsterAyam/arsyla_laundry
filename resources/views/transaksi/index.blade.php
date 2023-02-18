@@ -11,9 +11,9 @@
             <div class="card-header py-3">
                 <div class="row d-flex justify-content-between">
                     <div class="col-3">
-                        <a href="/dashboard/invoice/create" class="btn btn-primary">+ Tambah Data</a>
+                        <a href="/dashboard/invoice/create" class="btn btn-primary">+ Tambah Transaksi</a>
                     </div>
-                    <div class="col-3 d-flex">
+                    <div class="col-2">
                             {{-- <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0 mx-3">
                                 <div class="input-group">
                                     <input type="search" name="nameSearch" class="form-control" id="inlineFormInputGroupUsername">
@@ -22,15 +22,10 @@
                             </form> --}}
                             <!-- Button trigger modal -->
                          <!-- Button trigger modal -->
-                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-                                Launch demo modal
+                            <button type="button" class="btn btn-primary w-100 rounded-0" data-toggle="modal" data-target="#exampleModal">
+                               Filter <span class="fas fa-fw fa-filter"></span>
                             </button>
-                            <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
-                                <div class="input-group">
-                                    <input type="date" name="search" class="form-control" id="inlineFormInputGroupUsername">
-                                    <button type="submit" class="btn btn-primary rounded-0">Search</button>
-                                </div>
-                            </form>
+                           
                     </div>
                 </div>
             </div>
@@ -66,7 +61,7 @@
                                     @endif
                                 </td>
                                 <td>INV00{{ $i->id }}</td>
-                                <td>{{ $i->pelanggan->nama_pelanggan }}</td>
+                                <td>{{ $i->nama_pelanggan }}</td>
                                 <td>{{ $i->created_at }}</td>
                                 <td>{{ $i->batas_waktu }}</td>
                                 @if ($i->status === 'sudah dibayar' || $i->status === 'diambil')         
@@ -80,7 +75,7 @@
                                         class="fas fa-download fa-sm text-white-50"></i>Nota</a>
                                 </td>
                                 <td class="p-4" style="display: flex;">
-                                    <a href="/dashboard/invoice/detail{{ $i->id }}" class="btn btn-sm btn-primary border-0 mx-1">
+                                    <a href="/dashboard/invoice/detail/{{ $i->id }}" class="btn btn-sm btn-primary border-0 mx-1">
                                         <i class="fas fa-fw fa-info"></i>
                                     </a>
                                     <a href="/dashboard/invoice/{{ $i->id }}/edit" class="btn btn-sm btn-warning border-0 mx-1">

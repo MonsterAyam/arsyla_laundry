@@ -46,7 +46,7 @@
                         <div class="col-lg-8">
                             <div class="form-group d-flex" >
                                 <label for="" class="font-weight-bold h6 text-dark mt-2 mr-3">Batas waktu</label>
-                                <input type="datetime-local" required name="batas_waktu" class="form-control" id="">
+                                <input type="datetime-local" min="{{ date('m-d-Y\TH:i:s', time()) }}" required name="batas_waktu" class="form-control" id="">
                             </div>
                         </div>
                             </div>
@@ -110,8 +110,8 @@
                             <div class="row d-flex justify-content-start">
                                 <div class="col-lg-5">
                                     <div class="form-group my-3"  style="display:flex; align-content: center">
-                                        <select name="lang" class="js-searchBox" style="display: none;">
-                                            <option>Pelanggan</option>
+                                        <select name="lang" required class="js-searchBox" style="display: none;">
+                                            <option disabled selected>Masukan Nama Pelanggan</option>
                                             @foreach ( $pelanggan as $pg )
                                             <option value="{{ $pg->id }}">{{ $pg->nama_pelanggan }}({{ $pg->no_telp }})</option>
                                             @endforeach

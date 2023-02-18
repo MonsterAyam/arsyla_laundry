@@ -19,7 +19,7 @@ class Invoice extends Model
 
     public function Pelanggan()
     {
-        return $this->belongsTo((Pelanggan::class));
+        return $this->belongsTo(Pelanggan::class, 'pelanggan_id', 'id');
     }
 
 }

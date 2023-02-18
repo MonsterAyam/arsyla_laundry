@@ -23,18 +23,21 @@ class InvoiceController extends Controller
         if ($request->get('pelanggan')) {
             $result = DB::table('invoices')
                 ->join('pelanggans', 'invoices.pelanggan_id', '=', 'pelanggans.id')
-                ->select('invoices.*')
+                ->select('invoices.*', 'pelanggans.nama_pelanggan')
                 ->where('pelanggans.nama_pelanggan', '=', $request->get('pelanggan'))
                 ->whereBetween('invoices.created_at', [$request->get('date-dari'), $request->get('date-sampai')])
                 ->paginate(10); // Menggunakan metode paginate() untuk menghasilkan objek kelas LengthAwarePaginator
-
             return view('transaksi.index', [
                 "title" => "data pelanggan",
                 "data" => $result // Mengembalikan hasil dalam bentuk koleksi (collection)
             ]);
         } else {
             return view('transaksi.index', [
-                "data" => Invoice::query()->latest()->paginate(10)
+                "data" => DB::table('invoices')
+                ->join('pelanggans', 'invoices.pelanggan_id', '=', 'pelanggans.id')
+                ->select('invoices.*', 'pelanggans.nama_pelanggan')
+                ->latest()
+                ->paginate(10)
             ]);
         }
     }

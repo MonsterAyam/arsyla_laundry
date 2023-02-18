@@ -52,7 +52,7 @@ Route::get('/dashboard/laporan', function (Request $request) {
                 ->select(DB::raw('DATE(tanggal_dibayar) as per_bulan, SUM(grand_total) as total_pendapatan'))
                 ->where('tanggal_dibayar', '>=', $request->get('tanggal_dari'))
                 ->where('tanggal_dibayar', '<=', $request->get('tanggal_sampai'))
-                ->where('status', 'sudah dibayar')
+                ->where('status', 'sudah dibayar')->orWhere('status', 'diambil')
                 ->groupBy('per_bulan')
                 ->get(),
             "kerugian" => DB::table('jenis_pengeluarans')
@@ -70,7 +70,7 @@ Route::get('/dashboard/laporan', function (Request $request) {
                 DB::raw("(DATE_FORMAT(tanggal_dibayar, '%d-%m-%Y')) as per_bulan")
             )
                 ->orderBy('tanggal_dibayar')
-                ->where('status', 'sudah dibayar')
+                ->where('status', 'sudah dibayar')->orWhere('status', 'diambil')
                 ->groupBy(DB::raw("DATE_FORMAT(tanggal_dibayar, '%d-%m-%Y')"))
                 ->get(),
             "kerugian" => JenisPengeluaran::select(
@@ -93,7 +93,7 @@ Route::get('/dashboard/laporan/cetak_pdf', function () {
             DB::raw("(DATE_FORMAT(tanggal_dibayar, '%d-%m-%Y')) as per_bulan")
         )
             ->orderBy('tanggal_dibayar')
-            ->where('status', 'sudah dibayar')
+            ->where('status', 'sudah dibayar')->orWhere('status', 'diambil')
             ->groupBy(DB::raw("DATE_FORMAT(tanggal_dibayar, '%d-%m-%Y')"))
             ->get(),
         "kerugian" => JenisPengeluaran::select(
@@ -141,7 +141,7 @@ Route::get('/dashboard/cart/show', [CartController::class, 'show']);
 Route::get('/dashboard/cart/hapus/{id}', [CartController::class, 'delete']);
 Route::post('/dashboard/cart/transaksi', [CartController::class, 'transaksi']);
 
-Route::get('/dashboard/invoice/detail{id}', function ($id) {
+Route::get('/dashboard/invoice/detail/{id}', function ($id) {
     return view('transaksi.invoice_detail', [
         "data" => Transaksi::where('invoice_id', $id)->get(),
         "data_pg" => Invoice::where('id', $id)->first()
