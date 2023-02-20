@@ -22,7 +22,7 @@
                             </form> --}}
                             <!-- Button trigger modal -->
                          <!-- Button trigger modal -->
-                            <button type="button" class="btn btn-primary w-100 rounded-0" data-toggle="modal" data-target="#exampleModal">
+                            <button type="button" class="btn btn-sm btn-primary w-100 rounded-0" data-toggle="modal" data-target="#exampleModal">
                                Filter <span class="fas fa-fw fa-filter"></span>
                             </button>
                            
@@ -36,6 +36,7 @@
                             <tr>
                                 <th style="width: 10px;">No.</th>
                                 <th>Status</th>
+                                <th>Dibayar</th>
                                 <th>Kode Invoice</th>
                                 <th>Pelanggan</th>
                                 <th>Tanggal pesanan</th>
@@ -52,12 +53,19 @@
                                 @foreach ($data as $i)
                                 <td style="width: 10px;">{{ $data->firstItem()+$loop->index }}</td>
                                 <td>
-                                    @if ($i->status === 'belum dibayar')
-                                       <p class="badge badge-primary font-weight-bold p-2">{{ $i->status }}</p>
+                                    @if ($i->status === 'belum dibayar' || $i->status === 'sudah dibayar')
+                                       <p class="badge badge-primary font-weight-bold p-2">Baru</p>
                                     @elseif ($i->status === 'salah input')
                                        <p class="badge badge-danger font-weight-bold p-2">{{ $i->status }}</p>
                                      @else
                                        <p class="badge badge-success font-weight-bold p-2">{{ $i->status }}</p>
+                                    @endif
+                                </td>
+                                <td>
+                                    @if ($i->status === 'belum dibayar')
+                                       <p class="badge badge-danger font-weight-bold p-2"><span class="fas fa-times"></span></p>
+                                    @elseif ($i->status === 'sudah dibayar' || $i->status === 'diambil')
+                                       <p class="badge badge-success font-weight-bold p-2"><span class="fas fa-check"></span></p>
                                     @endif
                                 </td>
                                 <td>INV00{{ $i->id }}</td>
@@ -67,26 +75,26 @@
                                 @if ($i->status === 'sudah dibayar' || $i->status === 'diambil')         
                                 <td>{{ $i->tanggal_dibayar }}</td>
                                 @else
-                                <td>menunggu</td>
+                                <td><span class="fas text-primary fw-bold fa-lg fa-spinner"></span></td>
                                 @endif
                                 <td>{{"Rp " . number_format($i->grand_total,0,',','.'); }}</td>
                                 <td>
                                     <a href="/dashboard/invoice/print/{{ $i->id }}" class="d-none d-sm-inline-block btn btn-sm btn-danger shadow-sm"><i
-                                        class="fas fa-download fa-sm text-white-50"></i>Nota</a>
+                                        class="fas fa-download fa-sm text-white-50"></i></a>
                                 </td>
-                                <td class="p-4" style="display: flex;">
+                                <td style="display: flex;">
                                     <a href="/dashboard/invoice/detail/{{ $i->id }}" class="btn btn-sm btn-primary border-0 mx-1">
                                         <i class="fas fa-fw fa-info"></i>
                                     </a>
-                                    <a href="/dashboard/invoice/{{ $i->id }}/edit" class="btn btn-sm btn-warning border-0 mx-1">
+                                    {{-- <a href="/dashboard/invoice/{{ $i->id }}/edit" class="btn btn-sm btn-warning border-0 mx-1">
                                         <i class="fas fa-fw fa-edit"></i>
-                                    </a>
+                                    </a> --}}
                                     @can('admin')
                                         <form action="/dashboard/invoice/{{ $i->id }}" method="POST">
                                             @method('delete')
                                             @csrf
                                             <button type="submit" onclick="return confirm('Anda yakin ingin menghapus record berikut?');" class="btn btn-sm btn-danger mx-1">
-                                                <i class="fas fa-fw fa-trash"></i>
+                                                <i class="fas fa-fw fa-trash text-light"></i>
                                             </button>
                                         </form>
                                     @endcan
@@ -136,8 +144,7 @@
             </div>
         </div>
         <div class="modal-footer">
-            <button type="submit" class="btn btn-primary w-100">Save changes</button>
-            <button type="button" class="btn btn-secondary w-100" data-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary w-100">Cari <span class="fas fa-fw fa-search fa-sm"></span> </button>
         </div>
     </form>
       </div>

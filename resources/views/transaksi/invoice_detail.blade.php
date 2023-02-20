@@ -4,8 +4,9 @@
  <!-- Page Heading -->
  <div class="d-sm-flex align-items-center justify-content-between mb-4">
     <h1 class="h3 mb-0 text-gray-800">Transaksi Penjualan</h1>
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-        Launch demo modal
+    <button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#exampleModal">
+        <span class="fas fa-edit fa-sm"></span>
+        Ubah Status Transaksi
     </button>
     <a href="/dashboard/invoice/print/{{ $data_pg->id }}" class="d-none d-sm-inline-block btn btn-sm btn-danger shadow-sm"><i
         class="fas fa-download fa-sm text-white-50"></i> Cetak Nota</a>
@@ -80,7 +81,7 @@
             <div class="form-group">
                 <select name="status" class="form-control">
                     <option value="sudah dibayar">sudah dibayar</option>
-                    <option value="sudah dibayar">salah input</option>
+                    <option value="salah input">salah input</option>
                     <option value="diambil">sudah diambil</option>
                 </select>
             </div>
