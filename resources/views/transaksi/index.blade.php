@@ -86,9 +86,11 @@
                                     <a href="/dashboard/invoice/detail/{{ $i->id }}" class="btn btn-sm btn-primary border-0 mx-1">
                                         <i class="fas fa-fw fa-info"></i>
                                     </a>
-                                    {{-- <a href="/dashboard/invoice/{{ $i->id }}/edit" class="btn btn-sm btn-warning border-0 mx-1">
+                                    @can('admin')
+                                    <a href="/dashboard/invoice/{{ $i->id }}/edit" class="btn btn-sm btn-warning border-0 mx-1">
                                         <i class="fas fa-fw fa-edit"></i>
-                                    </a> --}}
+                                    </a>
+                                    @endcan
                                     @can('admin')
                                         <form action="/dashboard/invoice/{{ $i->id }}" method="POST">
                                             @method('delete')
