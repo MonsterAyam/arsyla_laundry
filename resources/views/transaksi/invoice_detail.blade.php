@@ -8,6 +8,13 @@
         <span class="fas fa-edit fa-sm"></span>
         Ubah Status Transaksi
     </button>
+    <tr>
+        <td>
+            <a class="btn btn-primary" href="https://api.whatsapp.com/send?phone=62{{ $data->no_telp }}&text=ARSYILA%20LAUNDRY%0AJ{{ Auth()->user()->no_telp }}%0ATgl%20:%20{{ $data->created_at }}%0ANama%20:%20{{ $data->pelanggan_id }}%0ACashier%20:%20{{ Auth()->user()->name }}%0AJenis%20Lapangan%20:%20{{ $data->lapangan }}%0AWaktu%20Main%20:%20{{ $data->waktu_main }}%0AHarga%20:%20{{ $data->tanggal_dibayar }}%0AJam%20Main%20:%20{{ $data->jam_main }}%0AStatus%20Pembayaran%20:%20{{ $data->status }}.">
+                <i class="fa fa-whatsapp" aria-hidden="true"></i>
+                Kirim Notifikasi Selesai</a>
+            </td>
+        </tr>
     <a href="/dashboard/invoice/print/{{ $data_pg->id }}" class="d-none d-sm-inline-block btn btn-sm btn-danger shadow-sm"><i
         class="fas fa-download fa-sm text-white-50"></i> Cetak Nota</a>
 </div>

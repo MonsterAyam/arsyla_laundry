@@ -34,11 +34,19 @@ class InvoiceController extends Controller
         } else {
             return view('transaksi.index', [
                 "data" => DB::table('invoices')
-                ->join('pelanggans', 'invoices.pelanggan_id', '=', 'pelanggans.id')
-                ->select('invoices.*', 'pelanggans.nama_pelanggan')
-                ->latest()
-                ->paginate(10)
+                    ->join('pelanggans', 'invoices.pelanggan_id', '=', 'pelanggans.id')
+                    ->select('invoices.*', 'pelanggans.nama_pelanggan')
+                    ->latest()
+                    ->paginate(10)
             ]);
+            $validateData['no_telp'] = $request->post('no_telp');
+            $validateData['batas_pembayaran'] = date('Y-m-d H:i:s', time() + (60 * 30));
+            $expired = mktime(0, 0, 0, date('n'), date('j') + 1, date('Y'));
+            $validateData['expired'] = date('Y-m-d', $expired);
+            // $validateData['batas_pembayaran'] = date('M d, Y H:i:s', time() + (60 * 3));
+            $validateData['pelanggan'] = Auth()->user()->name;
+            $transaksiID = transaksi::create($validateData)->id;
+            $ubah = ["active" => 1];
         }
     }
 
