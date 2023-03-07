@@ -23,7 +23,7 @@
                         <thead class="bg-gradient-success text-light">
                             <tr align="center">
                                 <th>No.</th>
-                                <th>Per-Bulan</th>
+                                <th>Per-Tanggal</th>
                                 <th>Pendapatan</th>
                             </tr>
                         </thead>
@@ -42,7 +42,7 @@
                         <thead class="bg-gradient-danger text-light">
                             <tr align="center">
                                 <th>No.</th>
-                                <th>Per-Bulan</th>
+                                <th>Per-Tanggal</th>
                                 <th>Pengeluaran</th>
                             </tr>
                         </thead>

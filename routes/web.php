@@ -51,8 +51,8 @@ Route::get('/dashboard/laporan', function (Request $request) {
             "pendapatan" => DB::table('invoices')
                 ->select(DB::raw('DATE(created_at) as per_bulan, SUM(grand_total) as total_pendapatan'))
                 ->where(function ($query) use ($request) {
-                    $query->where('created_at', '>=', $request->get('tanggal_dari'))
-                        ->where('created_at', '<=', $request->get('tanggal_sampai'))
+                    $query->where('tanggal_dibayar', '>=', $request->get('tanggal_dari'))
+                        ->where('tanggal_dibayar', '<=', $request->get('tanggal_sampai'))
                         ->where(function ($query) {
                             $query->where('status', 'sudah dibayar')
                                 ->orWhere('status', 'diambil');
