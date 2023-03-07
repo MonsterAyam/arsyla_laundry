@@ -8,6 +8,7 @@
 </head>
 <body>
     <div class="card-body">
+        <h1 style="text-align: center;border-bottom:3px solid black;">LAPORAN PENDAPATAN DAN PENGELUARAN</h1>
         <div class="table-responsive">
             <table border="1" cellpadding="2" id="dataTable" width="100%" cellspacing="0">
                 <thead class="bg-gradient-success text-light">
@@ -44,9 +45,9 @@
                        <td>{{ "Rp " . number_format($k->total_kerugian ,0,',','.'); }}</td>
                    </tr>
                 @endforeach
-                
                 </tbody>
             </table>
+            <h3 style="text-align:right">Dicetak oleh : {{ Auth()->user()->name }}</h3>
         </div>
     </div>
 </body>

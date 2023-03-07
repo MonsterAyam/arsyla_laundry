@@ -68,7 +68,7 @@
         <li class="nav-item side {{ Request::is('dashboard/laporan') ? 'active' : '' }}">
             <a class="nav-link" href="/dashboard/laporan">
                 <i class="fas fa-fw fa-chart-area"></i>           
-                <span>Laporan Laba/Rugi</span></a>
+                <span>Laporan P+/P-</span></a>
             </li>
             
             <!-- Nav Item - Utilities Collapse Menu -->

@@ -162,8 +162,8 @@ class InvoiceController extends Controller
     {
         if ($request->get('tanggal_dari') && $request->get('tanggal_sampai')) {
             $data = Invoice::query()
-                ->where('tanggal_dibayar', '>=', $request->get('tanggal_dari'))
-                ->where('tanggal_dibayar', '<=', $request->get('tanggal_sampai'))
+                ->where('created_at', '>=', $request->get('tanggal_dari'))
+                ->where('created_at', '<=', $request->get('tanggal_sampai'))
                 ->latest()
                 ->paginate(10);
             return view('laporan_transaksi.index', [

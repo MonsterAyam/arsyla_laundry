@@ -10,7 +10,7 @@
     </button>
     <tr>
         <td>
-            <a class="btn btn-sm btn-success" target="_blank" href="https://api.whatsapp.com/send?phone=62895639394873&text=ARSYILA%20LAUNDRY%0AEmail%20%20Kasir%20:%20{{ Auth()->user()->email }}%20%0ANama%20:%20{{ $data_pg->pelanggan->nama_pelanggan }}%0ACashier%20:%20{{ Auth()->user()->name }}.">
+            <a class="btn btn-sm btn-success" target="_blank" href="https://api.whatsapp.com/send?phone=62{{ $data_pg->pelanggan->no_telp }}&text=Hai Akbar fadli, Laundry anda sudah selesai,%20Silahkan ambil di Arsyla Laundry.Terima kasih!%0A%0A=================%0AStatus%20:%20{{ $data_pg->status === 'diambil' ? 'sudah dibayar' : 'belum dibayar' }}%0ATagihan%20:%20{{ $data_pg->status === 'sudah dibayar' || $data_pg->status === 'diambil' ? "-" : "Rp%20" . number_format($data_pg->grand_total ,0,',','.'); }}">
                 <i class="fa fa-brands fa-whatsapp" aria-hidden="true"></i>
                 Kirim Notifikasi Selesai</a>
             </td>
