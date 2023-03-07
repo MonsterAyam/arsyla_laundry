@@ -31,12 +31,12 @@
                             @if (empty($pendapatan))
                             <td colspan="6" align="center">Tidak Ada Produk!</td>
                             @endif  
-                           @foreach ($pendapatan as $p)
-                           <tr>
-                               <td>{{ $loop->iteration }}</td>
-                               <td>{{ $p->per_bulan }}</td>
-                               <td>{{ "Rp " . number_format($p->total_pendapatan ,0,',','.'); }}</td>
-                           </tr>
+                            @foreach ($pendapatan as $p)
+                            <tr>
+                                <td>{{ $loop->iteration }}</td>
+                                <td>{{ $p->per_bulan }}</td>
+                                <td>{{ "Rp " . number_format($p->total_pendapatan ,0,',','.'); }}</td>
+                            </tr>
                         @endforeach
                         </tbody>
                         <thead class="bg-gradient-danger text-light">
@@ -47,12 +47,12 @@
                             </tr>
                         </thead>
                         <tbody align="center">
-                           @foreach ($kerugian as $k)  
-                           <tr>
-                               <td>{{ $loop->iteration }}</td>
-                               <td>{{ $k->per_bulan }}</td>
-                               <td>{{ "Rp " . number_format($k->total_kerugian ,0,',','.'); }}</td>
-                           </tr>
+                        @foreach ($kerugian as $k)  
+                        <tr>
+                            <td>{{ $loop->iteration }}</td>
+                            <td>{{ $k->per_bulan }}</td>
+                            <td>{{ "Rp " . number_format($k->total_kerugian ,0,',','.'); }}</td>
+                        </tr>
                         @endforeach
                         
                         </tbody>
